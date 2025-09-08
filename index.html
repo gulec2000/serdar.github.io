@@ -11,6 +11,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script>
+			(function() {
+				// Check if the user has already been redirected in this session
+				if (sessionStorage.getItem('lang-redirected')) {
+					return;
+				}
+
+				var userLang = navigator.language || navigator.userLanguage;
+				if (userLang.startsWith('de')) {
+					sessionStorage.setItem('lang-redirected', 'true');
+					window.location.href = 'index.de.html';
+				}
+			})();
+		</script>
 	</head>
 	<body class="is-preload">
 
@@ -229,7 +243,7 @@
 								</section>
 							</div>
 							<ul class="actions">
-								<li><a href="generic.html" class="button">Learn more</a></li>
+								<li><a href="generic.html" class="button" aria-label="Learn more about my projects">Learn more</a></li>
 							</ul>
 						</div>
 					</section>
@@ -299,7 +313,10 @@
 			<footer id="footer" class="wrapper style1-alt">
 				<div class="inner">
 					<ul class="menu">
-						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						<li>&copy; Serdar Gulec. All rights reserved.</li>
+						<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						<li><a href="index.html">EN</a></li>
+						<li><a href="index.de.html">DE</a></li>
 					</ul>
 				</div>
 			</footer>
