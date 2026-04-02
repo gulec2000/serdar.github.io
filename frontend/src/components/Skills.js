@@ -48,6 +48,28 @@ export default function Skills() {
             </motion.div>
           ))}
         </div>
+
+        {/* Certifications */}
+        {t.skills.certifications && (
+          <div className="mt-12">
+            <h3 className="font-heading text-xl font-bold uppercase tracking-tight text-white mb-2">
+              {t.skills.certTitle}
+            </h3>
+            <div className="h-px w-12 bg-amber-500 mb-6" />
+            <div className="flex flex-wrap gap-2">
+              {t.skills.certifications.map((cert) => (
+                <span
+                  key={cert}
+                  data-testid={`cert-${cert.toLowerCase().replace(/[\s:\/&]/g, "-")}`}
+                  className="font-mono text-[11px] tracking-wider text-amber-500/80 border border-zinc-800 bg-[#121212]/60 px-3 py-1.5 rounded-sm hover:border-amber-500/40 hover:bg-[#121212] transition-colors cursor-default"
+                >
+                  <i className="fa-solid fa-certificate text-[9px] mr-1.5 opacity-60" />
+                  {cert}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

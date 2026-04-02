@@ -37,12 +37,15 @@ export default function Experience() {
               <div className="absolute left-0 top-1.5 w-[15px] h-[15px] rounded-full border-2 border-amber-500 bg-[#0A0A0A]" />
 
               <div className="border border-zinc-800 rounded-sm p-5 hover:border-zinc-700 transition-colors bg-[#121212]/50">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-3">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-1">
                   <h3 className="font-heading text-lg font-semibold text-white">
                     {job.title} <span className="text-zinc-500">@</span> {job.company}
                   </h3>
                   <span className="font-mono text-xs tracking-wider text-amber-500">{job.period}</span>
                 </div>
+                {job.subtitle && (
+                  <p className="font-mono text-xs text-zinc-300 italic mb-3">{job.subtitle}</p>
+                )}
                 <ul className="space-y-2">
                   {job.bullets.map((b, j) => (
                     <li key={j} className="font-mono text-xs leading-relaxed text-zinc-400 flex gap-2">
