@@ -83,7 +83,7 @@ export default function Sidebar() {
         <div className="flex flex-col gap-5">
           <LangToggle />
           <a
-            href="/cv.pdf"
+            href="./assets/docs/Serdar_Gulec_CV.pdf"
             download="Serdar_Gulec_CV.pdf"
             data-testid="cv-download-button"
             className="flex items-center gap-2 border border-zinc-700 hover:border-amber-500/60 text-zinc-400 hover:text-amber-400 font-mono text-xs tracking-wider uppercase px-3 py-2 rounded-sm transition-colors"
@@ -127,7 +127,7 @@ export default function Sidebar() {
           >
           <NavLinks onClick={() => setMobileOpen(false)} />
             <a
-              href="/cv.pdf"
+              href="./assets/docs/Serdar_Gulec_CV.pdf"
               download="Serdar_Gulec_CV.pdf"
               onClick={() => setMobileOpen(false)}
               className="flex items-center gap-2 border border-zinc-700 text-zinc-400 hover:text-amber-400 font-mono text-xs tracking-wider uppercase px-4 py-2.5 rounded-sm transition-colors"
