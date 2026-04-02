@@ -5,7 +5,7 @@ import { Menu, X, Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 // 1. Add this import at the top of Hero.js and Sidebar.js
 // (Make sure the relative path string is correct based on where the component is)
-import myCV from '../../public/Serdar_Gulec_CV.pdf'; 
+import myCV from '../Serdar_Gulec_CV.pdf'; 
 
 const navKeys = ["about", "experience", "projects", "skills", "blog", "contact"];
 
