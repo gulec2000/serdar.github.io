@@ -63,7 +63,7 @@ const translations = {
           title: "Spring PetClinic Microservices CI/CD",
           desc: "Full CI/CD Pipeline for microservice-based applications using Spring PetClinic. Jenkins Server on EC2 builds the pipelines.",
           url: "https://github.com/gulec2000/petclinic-microservices-project",
-          img: "https://gulecserdar.de/images/Project_501.jpg",
+          img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_501.jpg",
           tags: ["Jenkins", "Docker", "Kubernetes", "AWS"],
         },
         {
@@ -71,7 +71,7 @@ const translations = {
           title: "Phonebook Microservice on Kubernetes",
           desc: "Microservice web application with MySQL using Docker and Kubernetes with persistent volumes.",
           url: "https://github.com/gulec2000/203-Kubernetes-Microservice-Phonebook",
-          img: "https://gulecserdar.de/images/Project_203.png",
+          img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_203.png",
           tags: ["Kubernetes", "Docker", "Python", "MySQL"],
         },
         {
@@ -79,7 +79,7 @@ const translations = {
           title: "Phonebook on Docker Swarm",
           desc: "Jenkins pipeline deploying the Phonebook Application with Docker Swarm on EC2 using AWS ECR.",
           url: "https://github.com/gulec2000/202-jenkins-pipeline-for-phonebook-app-on-docker-swarm",
-          img: "https://gulecserdar.de/images/Project_202.jpg",
+          img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_202.jpg",
           tags: ["Jenkins", "Docker Swarm", "AWS ECR"],
         },
         {
@@ -87,7 +87,7 @@ const translations = {
           title: "Bookstore Web API Dockerization",
           desc: "RESTful bookstore web service using Docker, Flask, Dockerfile and Docker Compose on AWS EC2.",
           url: "https://github.com/gulec2000/201-dockerization-bookstore-api-on-python-flask-mysql",
-          img: "https://gulecserdar.de/images/Project_201",
+          img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_201",
           tags: ["Docker", "Flask", "MySQL", "AWS"],
         },
         {
@@ -95,7 +95,7 @@ const translations = {
           title: "Kittens Carousel on AWS EC2",
           desc: "Static website deployed with Apache Web Server on AWS EC2 using CloudFormation.",
           url: "https://github.com/gulec2000/Clarusway-Aws-DevOps-Workshop/tree/master/aws/projects/101-kittens-carousel-static-website-ec2",
-          img: "https://gulecserdar.de/images/Project_101.png",
+          img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_101.png",
           tags: ["AWS EC2", "CloudFormation", "Apache"],
         },
         {
@@ -103,7 +103,7 @@ const translations = {
           title: "Kittens Carousel on S3 & CloudFront",
           desc: "Static website on AWS S3, served through CloudFront and Route 53 using CloudFormation.",
           url: "https://github.com/gulec2000/Clarusway-Aws-DevOps-Workshop/tree/master/aws/projects/006-kittens-carousel-static-web-s3-cf",
-          img: "https://gulecserdar.de/images/Project_006.png",
+          img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_006.png",
           tags: ["AWS S3", "CloudFront", "Route 53"],
         },
         {
@@ -111,7 +111,7 @@ const translations = {
           title: "Phonebook on ALB with Auto Scaling",
           desc: "Phonebook app with Flask on AWS ALB with Auto Scaling Group and RDS using CloudFormation.",
           url: "https://github.com/gulec2000/Clarusway-Aws-DevOps-Workshop/tree/master/aws/projects/004-phonebook-web-application",
-          img: "https://gulecserdar.de/images/Project_004.png",
+          img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_004.png",
           tags: ["AWS ALB", "Auto Scaling", "RDS"],
         },
         {
@@ -119,7 +119,7 @@ const translations = {
           title: "Milliseconds Converter on AWS",
           desc: "Time converter application on AWS ALB with Auto Scaling Group using CloudFormation.",
           url: "https://github.com/gulec2000/Clarusway-Aws-DevOps-Workshop/tree/master/aws/projects/002-milliseconds-converter",
-          img: "https://gulecserdar.de/images/Project_002.png",
+          img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_002.png",
           tags: ["AWS ALB", "Auto Scaling", "Flask"],
         },
         {
@@ -127,7 +127,7 @@ const translations = {
           title: "Roman Numerals Converter on EC2",
           desc: "Number to Roman numerals converter deployed with Flask on AWS EC2 using CloudFormation.",
           url: "https://github.com/gulec2000/Clarusway-Aws-DevOps-Workshop/tree/master/aws/projects/001-roman-numerals-converter",
-          img: "https://gulecserdar.de/images/Project_001.png",
+          img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_001.png",
           tags: ["AWS EC2", "CloudFormation", "Flask"],
         },
       ],
@@ -224,7 +224,7 @@ const translations = {
           title: "Spring PetClinic Microservices CI/CD",
           desc: "Vollstandige CI/CD-Pipeline fur mikroservicebasierte Anwendungen mit Spring PetClinic. Jenkins-Server auf EC2.",
           url: "https://github.com/gulec2000/petclinic-microservices-project",
-          img: "https://gulecserdar.de/images/Project_501.jpg",
+          img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_501.jpg",
           tags: ["Jenkins", "Docker", "Kubernetes", "AWS"],
         },
         {
@@ -232,7 +232,7 @@ const translations = {
           title: "Phonebook-Microservice auf Kubernetes",
           desc: "Microservice-Webanwendung mit MySQL unter Verwendung von Docker und Kubernetes mit Persistent Volumes.",
           url: "https://github.com/gulec2000/203-Kubernetes-Microservice-Phonebook",
-          img: "https://gulecserdar.de/images/Project_203.png",
+          img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_203.png",
           tags: ["Kubernetes", "Docker", "Python", "MySQL"],
         },
         {
@@ -240,7 +240,7 @@ const translations = {
           title: "Phonebook auf Docker Swarm",
           desc: "Jenkins-Pipeline zur Bereitstellung der Phonebook-Anwendung mit Docker Swarm auf EC2 uber AWS ECR.",
           url: "https://github.com/gulec2000/202-jenkins-pipeline-for-phonebook-app-on-docker-swarm",
-          img: "https://gulecserdar.de/images/Project_202.jpg",
+          img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_202.jpg",
           tags: ["Jenkins", "Docker Swarm", "AWS ECR"],
         },
         {
@@ -248,7 +248,7 @@ const translations = {
           title: "Bookstore Web API Dockerisierung",
           desc: "RESTful Buchhandlungs-Webservice mit Docker, Flask und Docker Compose auf AWS EC2.",
           url: "https://github.com/gulec2000/201-dockerization-bookstore-api-on-python-flask-mysql",
-          img: "https://gulecserdar.de/images/Project_201",
+          img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_201",
           tags: ["Docker", "Flask", "MySQL", "AWS"],
         },
         {
@@ -256,7 +256,7 @@ const translations = {
           title: "Kittens Carousel auf AWS EC2",
           desc: "Statische Website mit Apache Web Server auf AWS EC2 uber CloudFormation bereitgestellt.",
           url: "https://github.com/gulec2000/Clarusway-Aws-DevOps-Workshop/tree/master/aws/projects/101-kittens-carousel-static-website-ec2",
-          img: "https://gulecserdar.de/images/Project_101.png",
+          img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_101.png",
           tags: ["AWS EC2", "CloudFormation", "Apache"],
         },
         {
@@ -264,7 +264,7 @@ const translations = {
           title: "Kittens Carousel auf S3 & CloudFront",
           desc: "Statische Website auf AWS S3, uber CloudFront und Route 53 mit CloudFormation ausgeliefert.",
           url: "https://github.com/gulec2000/Clarusway-Aws-DevOps-Workshop/tree/master/aws/projects/006-kittens-carousel-static-web-s3-cf",
-          img: "https://gulecserdar.de/images/Project_006.png",
+          img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_006.png",
           tags: ["AWS S3", "CloudFront", "Route 53"],
         },
         {
@@ -272,7 +272,7 @@ const translations = {
           title: "Phonebook auf ALB mit Auto Scaling",
           desc: "Phonebook-App mit Flask auf AWS ALB mit Auto Scaling Group und RDS uber CloudFormation.",
           url: "https://github.com/gulec2000/Clarusway-Aws-DevOps-Workshop/tree/master/aws/projects/004-phonebook-web-application",
-          img: "https://gulecserdar.de/images/Project_004.png",
+          img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_004.png",
           tags: ["AWS ALB", "Auto Scaling", "RDS"],
         },
         {
@@ -280,7 +280,7 @@ const translations = {
           title: "Millisekunden-Konverter auf AWS",
           desc: "Zeitkonverter-Anwendung auf AWS ALB mit Auto Scaling Group uber CloudFormation.",
           url: "https://github.com/gulec2000/Clarusway-Aws-DevOps-Workshop/tree/master/aws/projects/002-milliseconds-converter",
-          img: "https://gulecserdar.de/images/Project_002.png",
+          img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_002.png",
           tags: ["AWS ALB", "Auto Scaling", "Flask"],
         },
         {
@@ -288,7 +288,7 @@ const translations = {
           title: "Romische-Zahlen-Konverter auf EC2",
           desc: "Zahlen-zu-Romische-Ziffern-Konverter mit Flask auf AWS EC2 uber CloudFormation.",
           url: "https://github.com/gulec2000/Clarusway-Aws-DevOps-Workshop/tree/master/aws/projects/001-roman-numerals-converter",
-          img: "https://gulecserdar.de/images/Project_001.png",
+          img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_001.png",
           tags: ["AWS EC2", "CloudFormation", "Flask"],
         },
       ],
