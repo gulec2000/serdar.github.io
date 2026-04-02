@@ -3,6 +3,9 @@ import { useLang } from "@/context/LanguageContext";
 import { contactInfo } from "@/data/translations";
 import { Menu, X, Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+// 1. Add this import at the top of Hero.js and Sidebar.js
+// (Make sure the relative path string is correct based on where the component is)
+import myCV from '../../assets/docs/Serdar_Gulec_CV.pdf'; 
 
 const navKeys = ["about", "experience", "projects", "skills", "blog", "contact"];
 
@@ -83,7 +86,7 @@ export default function Sidebar() {
         <div className="flex flex-col gap-5">
           <LangToggle />
           <a
-            href="./assets/docs/Serdar_Gulec_CV.pdf"
+            href={myCV}  {/* <- CHANGED THIS TO USE THE IMPORTED VARIABLE */}
             download="Serdar_Gulec_CV.pdf"
             data-testid="cv-download-button"
             className="flex items-center gap-2 border border-zinc-700 hover:border-amber-500/60 text-zinc-400 hover:text-amber-400 font-mono text-xs tracking-wider uppercase px-3 py-2 rounded-sm transition-colors"
@@ -127,7 +130,7 @@ export default function Sidebar() {
           >
           <NavLinks onClick={() => setMobileOpen(false)} />
             <a
-              href="./assets/docs/Serdar_Gulec_CV.pdf"
+              href={myCV}   {/* <- CHANGED THIS TO USE THE IMPORTED VARIABLE */}
               download="Serdar_Gulec_CV.pdf"
               onClick={() => setMobileOpen(false)}
               className="flex items-center gap-2 border border-zinc-700 text-zinc-400 hover:text-amber-400 font-mono text-xs tracking-wider uppercase px-4 py-2.5 rounded-sm transition-colors"

@@ -1,6 +1,9 @@
 import { useLang } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
 import { ChevronDown, Download } from "lucide-react";
+// 1. Add this import at the top of Hero.js and Sidebar.js
+// (Make sure the relative path string is correct based on where the component is)
+import myCV from '../../assets/docs/Serdar_Gulec_CV.pdf'; 
 
 export default function Hero() {
   const { t } = useLang();
@@ -76,7 +79,7 @@ export default function Hero() {
             <ChevronDown size={14} />
           </a>
           <a
-            href="./assets/docs/Serdar_Gulec_CV.pdf"
+            href={myCV}   {/* <- CHANGED THIS TO USE THE IMPORTED VARIABLE */}
             download="Serdar_Gulec_CV.pdf"
             data-testid="hero-download-cv-button"
             className="inline-flex items-center gap-2 border border-zinc-600 hover:border-amber-500/60 text-zinc-300 hover:text-amber-400 font-mono text-xs tracking-wider uppercase px-6 py-3 rounded-sm transition-colors font-bold"
