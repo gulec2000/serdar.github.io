@@ -5,6 +5,7 @@ const translations = {
       experience: "Experience",
       projects: "Projects",
       skills: "Skills",
+      blog: "Blog",
       contact: "Contact",
     },
     hero: {
@@ -13,6 +14,7 @@ const translations = {
       role: "DevOps & Cloud Engineer",
       bio: "I'm a DevOps and Cloud Engineer currently working as an IT Expert at Computacenter. My professional approach is driven by a strong everyday-learning mentality and an open-minded determination that allows me to master new skill sets and adapt to new environments rapidly. I specialize in the orchestration, automation, and scaling of mission-critical workloads, with a particular focus on building automated OpenShift and Kubernetes platforms using GitOps workflows and Infrastructure as Code. As a certified Azure DevOps Engineer and Terraform Associate, I design robust CI/CD pipelines and manage complex cloud-native infrastructures across AWS and Azure. My experience in multicultural, Agile environments makes me a highly collaborative and effective member of any Scrum or Kanban team. Feel free to explore my work and take your time!",
       cta: "Explore my work",
+      downloadCV: "Download CV",
     },
     experience: {
       title: "Work Experience",
@@ -181,6 +183,12 @@ const translations = {
         { name: "YAML/JSON", icon: "fa-solid fa-file-code", desc: "Configuration & data formats." },
       ],
     },
+    blog: {
+      title: "Blog",
+      subtitle: "Thoughts and lessons from building DevOps platforms in the field.",
+      readMore: "Read Article",
+      readLess: "Close",
+    },
     contact: {
       title: "Get in Touch",
       subtitle: "Feel free to contact me regarding my portfolio or if you have any questions about my work.",
@@ -194,6 +202,7 @@ const translations = {
       experience: "Erfahrung",
       projects: "Projekte",
       skills: "Kompetenzen",
+      blog: "Blog",
       contact: "Kontakt",
     },
     hero: {
@@ -202,6 +211,7 @@ const translations = {
       role: "DevOps & Cloud Engineer",
       bio: "Ich bin DevOps & Cloud Engineer und derzeit als IT-Experte bei Computacenter tatig. Ich verfuge uber tiefgreifende Expertise in der Orchestrierung, Automatisierung und Skalierung geschaftskritischer Workloads auf Cloud-Native-Plattformen. Mein Schwerpunkt liegt in der Konzeption und Implementierung hochverfugbarer Kubernetes- und RedHat OpenShift-Cluster unter konsequenter Anwendung von GitOps-Prinzipien sowie Infrastructure as Code mit Terraform. Durch meine fundierte Erfahrung in der Entwicklung robuster CI/CD-Pipelines innerhalb von Microsoft Azure DevOps und GitLab optimiere ich Software-Lifecycle-Prozesse durch moderne Container-Technologien wie Docker und Podman. Dank meiner ausgepragten Lernbereitschaft und meiner Erfahrung in multikulturellen, agilen Teams fuge ich mich nahtlos in Scrum- oder Kanban-Strukturen ein. Schauen Sie sich gerne um und entdecken Sie meine Projekte!",
       cta: "Meine Arbeit entdecken",
+      downloadCV: "Lebenslauf herunterladen",
     },
     experience: {
       title: "Berufserfahrung",
@@ -369,6 +379,12 @@ const translations = {
         { name: "JIRA", icon: "fa-brands fa-atlassian", desc: "Agile Projektverfolgung." },
         { name: "YAML/JSON", icon: "fa-solid fa-file-code", desc: "Konfigurations- und Datenformate." },
       ],
+    },
+    blog: {
+      title: "Blog",
+      subtitle: "Erkenntnisse und Erfahrungen aus dem Aufbau von DevOps-Plattformen in der Praxis.",
+      readMore: "Artikel lesen",
+      readLess: "Schliessen",
     },
     contact: {
       title: "Kontakt aufnehmen",

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useLang } from "@/context/LanguageContext";
 import { contactInfo } from "@/data/translations";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const navKeys = ["about", "experience", "projects", "skills", "contact"];
+const navKeys = ["about", "experience", "projects", "skills", "blog", "contact"];
 
 function NavLinks({ onClick }) {
   const { t } = useLang();
@@ -64,6 +64,7 @@ function SocialLinks({ className = "" }) {
 
 export default function Sidebar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { t } = useLang();
 
   return (
     <>
@@ -81,6 +82,15 @@ export default function Sidebar() {
         </div>
         <div className="flex flex-col gap-5">
           <LangToggle />
+          <a
+            href="/cv.pdf"
+            download="Serdar_Gulec_CV.pdf"
+            data-testid="cv-download-button"
+            className="flex items-center gap-2 border border-zinc-700 hover:border-amber-500/60 text-zinc-400 hover:text-amber-400 font-mono text-xs tracking-wider uppercase px-3 py-2 rounded-sm transition-colors"
+          >
+            <Download size={12} />
+            {t.hero.downloadCV}
+          </a>
           <SocialLinks />
         </div>
       </aside>
@@ -115,7 +125,16 @@ export default function Sidebar() {
             transition={{ duration: 0.2 }}
             className="md:hidden fixed inset-0 top-14 bg-black/98 z-40 flex flex-col items-center justify-center gap-6"
           >
-            <NavLinks onClick={() => setMobileOpen(false)} />
+          <NavLinks onClick={() => setMobileOpen(false)} />
+            <a
+              href="/cv.pdf"
+              download="Serdar_Gulec_CV.pdf"
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center gap-2 border border-zinc-700 text-zinc-400 hover:text-amber-400 font-mono text-xs tracking-wider uppercase px-4 py-2.5 rounded-sm transition-colors"
+            >
+              <Download size={12} />
+              {t.hero.downloadCV}
+            </a>
             <SocialLinks className="mt-4" />
           </motion.div>
         )}
