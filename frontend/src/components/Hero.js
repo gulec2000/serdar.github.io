@@ -79,7 +79,7 @@ export default function Hero() {
             <ChevronDown size={14} />
           </a>
           <a
-            href={myCV}   {/* <- CHANGED THIS TO USE THE IMPORTED VARIABLE */}
+            href={myCV}
             download="Serdar_Gulec_CV.pdf"
             data-testid="hero-download-cv-button"
             className="inline-flex items-center gap-2 border border-zinc-600 hover:border-amber-500/60 text-zinc-300 hover:text-amber-400 font-mono text-xs tracking-wider uppercase px-6 py-3 rounded-sm transition-colors font-bold"
