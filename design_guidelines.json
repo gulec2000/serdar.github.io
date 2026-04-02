@@ -1,0 +1,95 @@
+{
+  "theme": "Dark",
+  "archetype": "4 - Swiss & High-Contrast (Retro-Futurism / Terminal variant)",
+  "design_philosophy": "A highly technical, precise, and authoritative design. Reflects the rigorous and structured nature of a DevOps Cloud Engineer. Uses extreme contrast, monospaced fonts for technical data, and glowing amber accents against deep obsidian to simulate a modern command center or IDE.",
+  "typography": {
+    "primary_heading_font": "Cabinet Grotesk",
+    "secondary_body_font": "IBM Plex Mono",
+    "rules": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tighter font-black uppercase",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight font-bold uppercase",
+      "h3": "text-xl sm:text-2xl tracking-tight font-semibold",
+      "body": "text-base leading-relaxed font-mono",
+      "labels": "text-xs tracking-[0.2em] uppercase font-mono text-zinc-400"
+    }
+  },
+  "colors": {
+    "background": {
+      "base": "#0A0A0A",
+      "surface": "#121212",
+      "surface_hover": "#1C1C1E"
+    },
+    "text": {
+      "primary": "#FFFFFF",
+      "secondary": "#A3A3A3",
+      "muted": "#525252"
+    },
+    "accent": {
+      "primary": "#F5A623",
+      "primary_hover": "#D98218",
+      "border": "#262626",
+      "border_glow": "rgba(245, 166, 35, 0.4)"
+    }
+  },
+  "layout_and_spacing": {
+    "spacing_scale": "Use generous padding for sections (py-24 to py-32). Dense packing for technical data (gap-4).",
+    "grid_system": "Bento Grid (Control Room Grid). Strict adherence to grid lines. Grid items should have a 1px solid border (border-zinc-800) to expose the skeleton.",
+    "sidebar": "Fixed left navigation sidebar on desktop (w-64 or w-72), holding Logo, Nav Links, Language Toggle (EN/DE), and Socials. Main content area sits to the right.",
+    "mobile": "Sidebar converts to a top header with a Hamburger menu (use Shadcn Sheet) on mobile devices."
+  },
+  "components_strategy": {
+    "hero_section": "Left-aligned inside the main content area. Massive H1 (Cabinet Grotesk). Typewriter effect for 'DevOps Cloud Engineer'. Use 'hero_bg' as a subtle, low-opacity (20%) background behind the hero area, masked with a gradient so it fades into black at the bottom.",
+    "work_experience": "Vertical timeline. 'Tracing Beam' effect: a glowing amber line connecting experience nodes. Flat design for the cards, borders only, no shadows.",
+    "skills_toolbox": "Dense bento grid (grid-cols-2 md:grid-cols-4 lg:grid-cols-5) of skills. Each skill is a flat rectangle with 1px border (border-zinc-800), containing the tool name in IBM Plex Mono and a small Phosphor icon. Hover state: border color changes to amber, text brightens.",
+    "projects_showcase": "Grid of 9 projects (grid-cols-1 md:grid-cols-2 xl:grid-cols-3). Use the 'Grid Borders' architectural look. Each project card is border-collapse style. Hovering slightly translates the card up (-translate-y-1).",
+    "contact_form": "Formspree integration. Brutalist inputs: transparent backgrounds, 1px solid border-zinc-700, square corners (rounded-none or max rounded-sm). Focus state: ring-0, border-amber-500. Submit button is solid amber with black text.",
+    "language_toggle": "A sleek toggle (EN / DE) placed in the sidebar. Needs to control a React Context that switches a dictionary of translations for the entire page."
+  },
+  "media_and_images": {
+    "rules": "Never use placeholders. Use the provided URLs.",
+    "image_urls": {
+      "hero_bg": {
+        "url": "https://static.prod-images.emergentagent.com/jobs/71c74e10-8a8b-4b1b-9260-983562c1e2b0/images/b9b5352ec87bb00bd9dfb6f437bb9376d5955df518f941f14f5a7d239d18b48a.png",
+        "description": "Dark cinematic abstract 3D visualization of cloud computing network servers, glowing amber data streams. Overlay with bg-black/80.",
+        "category": "hero_background"
+      },
+      "texture_bg": {
+        "url": "https://static.prod-images.emergentagent.com/jobs/71c74e10-8a8b-4b1b-9260-983562c1e2b0/images/7ecfcaef50b67199d9d8fbe193de8c4f174b6d3e49279cbfeb7333eecc34084e.png",
+        "description": "Minimalist dark mode tech texture. Use as a repeating pattern or subtle background for the projects or skills section (opacity 10%).",
+        "category": "section_background"
+      },
+      "project_placeholder_1": {
+        "url": "https://images.pexels.com/photos/6466141/pexels-photo-6466141.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "High-tech server rack in a secure data center. Use as a fallback thumbnail for projects.",
+        "category": "project_thumbnail"
+      },
+      "project_placeholder_2": {
+        "url": "https://images.unsplash.com/photo-1667984390553-7f439e6ae401?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwyfHxjbG91ZCUyMHNlcnZlciUyMGFyY2hpdGVjdHVyZXxlbnwwfHx8fDE3NzUxMjM0MzB8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Cloud server architecture visualization. Use as a fallback thumbnail for projects.",
+        "category": "project_thumbnail"
+      }
+    }
+  },
+  "testing_attributes": {
+    "rules": "All interactive elements MUST include a data-testid attribute.",
+    "examples": [
+      "data-testid='nav-link-experience'",
+      "data-testid='lang-toggle-button'",
+      "data-testid='project-card-<id>'",
+      "data-testid='contact-form-submit'"
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Install necessary fonts: @fontsource/cabinet-grotesk and @fontsource/ibm-plex-mono (or import via Google Fonts).",
+    "Install Phosphor Icons: yarn add @phosphor-icons/react",
+    "Install Framer Motion: yarn add framer-motion",
+    "Use .js files. Do not use TypeScript (.tsx).",
+    "Create a fixed sidebar layout for Desktop (e.g., w-72 h-screen fixed left-0 top-0 border-r border-zinc-800 bg-black).",
+    "Implement an English/German translation context. You have the English text from the crawl. Translate the headings, bio, and job titles to German to populate the DE dictionary.",
+    "Projects: Map over the 9 specified projects (PetClinic, Phonebook microservice, Phonebook Docker Swarm, Bookstore Web API, Kittens Carousel EC2, Kittens Carousel S3, Phonebook ALB, Milliseconds Converter, Roman Numerals Converter).",
+    "Skills: List the 15 requested skills (AWS, Azure, Kubernetes, OpenShift, Ansible, Terraform, Docker, Jenkins, GitLab CI/CD, GitOps, ArgoCD, Helm, HC Vault, Prometheus, Grafana).",
+    "Formspree: Set up the contact form with standard fields (Name, Email, Message) to target a generic or provided Formspree endpoint (e.g., action='https://formspree.io/f/YOUR_ENDPOINT').",
+    "All components must be strictly dark-themed. Avoid default generic Shadcn styles by removing standard border-radius and shadow-sm classes. Replace with rounded-none or rounded-sm, and flat borders.",
+    "Ensure the hero background image has an aggressive dark overlay (bg-black/80) so text is 100% legible with APCA contrast standards."
+  ]
+}

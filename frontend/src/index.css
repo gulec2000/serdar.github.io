@@ -1,0 +1,87 @@
+@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  background-color: #0A0A0A;
+  color: #FFFFFF;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-heading {
+  font-family: 'Cabinet Grotesk', sans-serif;
+}
+
+.font-mono {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 37 90% 55%;
+    --primary-foreground: 0 0% 4%;
+    --secondary: 0 0% 11%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 11%;
+    --muted-foreground: 0 0% 64%;
+    --accent: 37 90% 55%;
+    --accent-foreground: 0 0% 4%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 37 90% 55%;
+    --radius: 0.125rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer base {
+  [data-debug-wrapper="true"] {
+    display: contents !important;
+  }
+  [data-debug-wrapper="true"] > * {
+    margin-left: inherit;
+    margin-right: inherit;
+    margin-top: inherit;
+    margin-bottom: inherit;
+    padding-left: inherit;
+    padding-right: inherit;
+    padding-top: inherit;
+    padding-bottom: inherit;
+    column-gap: inherit;
+    row-gap: inherit;
+    gap: inherit;
+    border-left-width: inherit;
+    border-right-width: inherit;
+    border-top-width: inherit;
+    border-bottom-width: inherit;
+    border-left-style: inherit;
+    border-right-style: inherit;
+    border-top-style: inherit;
+    border-bottom-style: inherit;
+    border-left-color: inherit;
+    border-right-color: inherit;
+    border-top-color: inherit;
+    border-bottom-color: inherit;
+  }
+}
