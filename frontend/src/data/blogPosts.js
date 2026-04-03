@@ -1,5 +1,40 @@
 const blogPosts = [
   {
+    id: "phonebook-microservice-orchestration",
+    title: "Deployment Specification: Automated Phonebook Microservice Orchestration",
+    date: "January 10, 2021",
+    readTime: "7 min read",
+    excerpt: "A deep dive into automating the deployment of a Phonebook microservice using AWS CloudFormation and Kubernetes, featuring segmented CRUD and Search operations, persistent volumes, and secure environmental configurations.",
+    tags: ["Kubernetes", "AWS", "CloudFormation", "Microservices", "Docker"],
+    image: "/images/phonebook-architecture.jpeg", // Note: Ensure the image is placed here in the public folder
+    sections:[
+      {
+        heading: "1. Infrastructure Provisioning via AWS CloudFormation",
+        body: "Infrastructure as Code (IaC) is the cornerstone of modern cloud architecture, transitioning deployments from manual, error-prone configurations to programmable, repeatable environments. For the Phonebook Microservice application, AWS CloudFormation serves as the primary orchestration engine to provision the underlying compute layer. By automating the setup of Ubuntu 20.04 nodes on EC2, we ensure absolute environment parity between development, staging, and production. This strategy is critical for rapid disaster recovery; in the event of a regional or availability zone failure, the entire infrastructure stack can be redeployed within minutes.\n\nCluster Specifications:\n• Instance Type: t2.medium (Required minimum to handle control plane and container overhead)\n• Operating System: Ubuntu 20.04\n• Cluster Master: 1 Node\n• Worker Node: 1 Node\n\nTo achieve a fully automated \"zero-touch\" setup, the CloudFormation template delivers a User Data script that executes upon node initialisation:\n1. System Preparation: Updates local packages and installs the core Kubernetes stack, including kubeadm, kubectl, and kubelet.\n2. Repository Acquisition: Clones the application source code from the project's GitHub repository to local storage.\n3. Cluster Initialization: Executes kubeadm init on the master node and generates the join token for the worker.\n4. Worker Integration: Automatically joins the worker node to the cluster, establishing the node-to-node overlay network."
+      },
+      {
+        heading: "2. Containerisation Strategy and Microservice Segmentation",
+        body: "The Phonebook application architecture is intentionally decoupled into distinct microservices to enhance operational agility. By separating \"Read\" (Search) operations from \"CUD\" (Create, Update, Delete) operations, we move away from monolithic bottlenecks. This segmentation allows for independent development lifecycles; updates to the Gateway/CUD logic can be deployed without introducing downtime to the search interface.\n\nThe application is containerised into two distinct Docker images, both leveraging the Python Flask framework:\n\n• Search Image (Frontend): A read-only service dedicated to querying the database and rendering results to the user.\n• Result/Web Server Image (Backend): The application gateway responsible for the functional logic of creating, updating, and deleting records.\n\nThese services interact with the MySQL database via the internal Kubernetes DNS name provided by the Database Service. This interaction model increases application resilience: if the CUD backend experiences latency during heavy write-intensive transactions, the Search frontend remains responsive."
+      },
+      {
+        heading: "3. Kubernetes Deployment Configuration",
+        body: "Kubernetes Deployment controllers maintain the desired state of the microservices, utilising ReplicaSets to ensure high availability. If a pod fails due to resource exhaustion or application errors, the controller immediately schedules a replacement.\n\nCREATE/DELETE/UPDATE (Backend) Deployment\n• Primary Function: Application gateway for all write-heavy and administrative operations.\n• Container Port: 80.\n• Replication: Configured with one or more replicas based on traffic load.\n• Context: Processes POST requests for adding, updating, and deleting records.\n\nSEARCH (Frontend) Deployment\n• Primary Function: User interface for read-only phonebook lookups.\n• Container Port: 80.\n• Context: Dedicated to GET requests and search result rendering.\n\nFrom an architectural standpoint, separating these deployments allows for granular scaling. The Search deployment is typically CPU-bound, while the CUD deployment is I/O-bound, constrained by database transaction speeds."
+      },
+      {
+        heading: "4. Service Discovery and Networking Architecture",
+        body: "The Kubernetes networking model provides a tiered approach to accessibility. For this deployment, we utilise a hybrid strategy: NodePort services provide external ingress for end-users, while ClusterIP restricts internal components from public exposure. While NodePort is utilised here for demonstration and testing, a production-grade AWS deployment would typically front these services with an Elastic/Application Load Balancer.\n\nPublic-facing services:\n• CUD Service: Type NodePort, Port 30001 (Target Port 80)\n• Search Service: Type NodePort, Port 30002 (Target Port 80)\n\nTo secure the data layer, the Database Service is configured as follows:\n• Type: ClusterIP (Internal only)\n• Target Port: 3306\n• Security Impact: By using ClusterIP, the MySQL instance is reachable only by the Search and CUD pods via the cluster's internal network. This prevents the database from being attacked from the public internet."
+      },
+      {
+        heading: "5. Persistent Data Layer and Volume Management",
+        body: "In a Kubernetes environment, pods are ephemeral; any data stored within a container's writable layer is lost upon pod termination. To ensure the durability of phonebook records, externalised state is required.\n\nThe technical specifications for the persistent layer are:\n• PV & PVC: Capacity 20Gi, Access Mode ReadWriteOnce, Host Path Mapping: /mnt/data.\n• Scheduling Requirement: Since hostPath is used for data storage, the MySQL pod must be pinned to the worker node (via nodeSelector or nodeName) to ensure it always attaches to the physical directory where the data resides.\n\nDATABASE DEPLOYMENT Specification:\n• Image: mysql:5.7\n• Persistence: The PVC is mounted to the MySQL data directory. This ensures that even if the database pod is restarted or moved, the phonebook schema and user records remain intact."
+      },
+      {
+        heading: "6. Environmental Configuration and Security Posture",
+        body: "Separating configuration from code is a fundamental security requirement. This deployment utilises Kubernetes Secrets and ConfigMaps to inject environmental variables, preventing sensitive credentials from being leaked within container images or version control.\n\n• Sensitive Data: All database passwords are stored in kubernetes-secrets.\n• Service Discovery: The database host address is managed via a ConfigMap. Crucially, this value points to the Database Service Name (leveraging Kubernetes internal DNS) rather than a static IP address, ensuring connectivity remains stable even if the database pod is rescheduled.\n• Environmental Variables: Both deployments require MYSQL_DATABASE_HOST (from ConfigMap), MYSQL_DATABASE_USER, and MYSQL_DATABASE_PASSWORD (from Secret).\n\nThis comprehensive specification—combining IaC automation, microservice segmentation, and stateful persistence—results in a robust, production-ready orchestration."
+      }
+    ]
+  },
+  {
     id: "spring-petclinic-microservices",
     title: "Spring Petclinic Microservices Project",
     date: "February 7, 2021",

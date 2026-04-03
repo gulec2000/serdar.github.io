@@ -396,7 +396,7 @@ const translations = {
 };
 
 export const contactInfo = {
-  address: { line1: "Raiffeisenstr. 11", line2: "35415 Pohlheim", line3: "Hessen, Germany" },
+  address: { line1: "Pohlheim 35415", line2: "Hessen, Germany" },
   email: "gulec2000@gmail.com",
   phone: "+ 49 (176) 345-31302",
   socials: [
