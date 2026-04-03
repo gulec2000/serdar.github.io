@@ -1,5 +1,60 @@
 const blogPosts = [
   {
+    id: "spring-petclinic-microservices",
+    title: "Spring Petclinic Microservices Project",
+    date: "February 7, 2021",
+    readTime: "8 min read",
+    excerpt: "Transitioning from monolithic applications to microservices is a rite of passage for any DevOps engineer. A deep dive into building and deploying a distributed version of the classic Spring PetClinic application.",
+    tags:["Microservices", "Docker", "Kubernetes", "Spring Cloud"],
+    image: "/spring-petclinic-architecture.png", // Ensure the PNG is in your public folder
+    sections:[
+      {
+        heading: "My Journey into Microservices: Building a Distributed PetClinic with Docker and Kubernetes",
+        body: "Transitioning from monolithic applications to microservices is a rite of passage for any DevOps engineer. During my time in the DevOps Cloud Bootcamp, my colleagues and I tackled a demo project that brought together the best of Spring Cloud, Docker, and Kubernetes. Here's a breakdown of how we built and deployed a distributed version of the classic Spring PetClinic application."
+      },
+      {
+        heading: "The Architectural Design",
+        body: "The core of this project is built on the Spring Cloud Netflix technology stack. Instead of one giant application, we split the functionality into specialised services that communicate with each other.\n\nKey Components:\n• Service Discovery (Eureka): Acts as the phone book for our services.\n• API Gateway (Zuul): The single entry point for the frontend, handling routing and reverse proxying.\n• Config Server: Centralizes all configurations across different environments.\n• Resilience (Hystrix): Implements the Circuit Breaker pattern to ensure system stability.\n• Observability: We used Zipkin for distributed tracing, and Prometheus and Grafana to monitor metrics."
+      },
+      {
+        heading: "Deployment: From Docker to the Cloud",
+        body: "To ensure environment consistency, we used Docker Images. To build our environment, we used a specialized Maven profile:\n\n./mvnw clean install -PbuildDocker\n\nThis command packages the applications into Docker images. While we initially used docker-compose for local testing, the real power came from deploying these images to a Kubernetes cluster managed by Rancher and hosted on AWS."
+      },
+      {
+        heading: "Essential Code Snippets",
+        body: "1. Database Integration with Docker\nWe didn't need to install MySQL locally; we ran it as a container:\n\ndocker run -e MYSQL_ROOT_PASSWORD=petclinic -e MYSQL_DATABASE=petclinic -p 3306:3306 mysql:5.7.8\n\nThen, we configured our services to use the MySQL profile by setting an environment variable in the Dockerfile:\n\nENV SPRING_PROFILES_ACTIVE docker,mysql\n\n2. Custom Metrics with Micrometer\nWe used the @Timed annotation to track how long specific operations took, such as managing owner records in the customers-service:\n\n@Timed(\"petclinic.owner\")\npublic class OwnerResource { ... }"
+      },
+      {
+        heading: "What I Got Most Out of This Project",
+        body: "The biggest takeaway for me was the shift in mindset toward system reliability and automation.\n\n• Decoupling: Understanding that services like visits-service and vets-service can scale independently.\n• Automation: Using the included Jenkins and Ansible configurations to automate the delivery pipeline.\n• Visibility: Learning to use the Hystrix Dashboard and Grafana to visualize system health was invaluable."
+      },
+      {
+        heading: "Architectural Design of the PetClinic Microservices Project",
+        body: "1. Project Overview and Distributed System Goals\nThe PetClinic Microservices project is a distributed evolution of the classic Spring PetClinic Sample Application. This architecture serves as a premier reference for transitioning from a monolithic codebase to a decoupled, microservices-oriented system. By leveraging the Spring Cloud Netflix technology stack, the project demonstrates how to decompose business logic into independent, scalable units.\n\nThis document is designed for learners in DevOps, Docker, and Kubernetes. The primary objective is to illustrate the practical implementation of service discovery, centralised configuration, API routing, and resilient communication within a containerised ecosystem."
+      },
+      {
+        heading: "Distributed Architecture and Spring Cloud Components",
+        body: "The system is partitioned into specialised services categorised into infrastructure and business logic. An AngularJS frontend interacts with the backend through an API Gateway, which handles routing to the appropriate microservice.\n\nCore Spring Cloud Infrastructure:\n• Config Server: Centralizes external configuration. Supports a local profile (http://localhost:8888).\n• Discovery Server (Eureka): Manages service registration and discovery (http://localhost:8761).\n• API Gateway (Zuul): Acts as the reverse proxy and single entry point for the frontend (http://localhost:8080).\n• Circuit Breaker (Hystrix): Ensures system resilience by preventing cascading failures (Dashboard: http://localhost:7979).\n\nBusiness Microservices:\n• customers-service: Handles owner and pet management.\n• vets-service: Manages veterinarian data.\n• visits-service: Tracks pet visit history."
+      },
+      {
+        heading: "Database Configuration and Persistence",
+        body: "By default, the application utilises HSQLDB, an in-memory database ideal for rapid development.\n\nFor persistent storage, the project includes support for MySQL.\n• Docker Implementation: docker run -e MYSQL_ROOT_PASSWORD=petclinic -e MYSQL_DATABASE=petclinic -p 3306:3306 mysql:5.7.8\n• Profile Activation: Activate the MySQL profile by passing the program argument: --spring.profiles.active=mysql.\n• Docker Deployment: For containerized environments, the profile is set via an environment variable in the Dockerfile: ENV SPRING_PROFILES_ACTIVE docker,mysql."
+      },
+      {
+        heading: "Containerisation and Deployment Strategy",
+        body: "The project emphasises consistency across environments through strict containerisation.\n\n• Build Process: Images are generated via the Maven wrapper: ./mvnw clean install -PbuildDocker.\n• Orchestration: Use docker-compose up to launch the infrastructure.\n• Startup Coordination: Container startup order is managed via a dedicated dockerize script, ensuring infrastructure readiness before business services attempt to connect.\n\nNote to Learners: On Windows or MacOS, the Docker VM requires significant memory allocation. Insufficient RAM will cause the docker-compose up process to be exceptionally slow or fail."
+      },
+      {
+        heading: "Observability and Monitoring Setup",
+        body: "The application uses MicroMeter and Spring Boot Actuator for instrumentation. Key business metrics are captured via the @Timed annotation on controllers (e.g., petclinic.owner).\n\nMonitoring Stack:\n• Prometheus: Scrapes and stores metrics from the microservices (http://localhost:9091).\n• Grafana: Provides the visualization layer with pre-configured dashboards (http://localhost:3000).\n• Admin Server: A Spring Boot Admin instance provides a management UI (http://localhost:9090).\n• Distributed Tracing: Zipkin is used to track request flows across services (http://localhost:9411/zipkin/)."
+      },
+      {
+        heading: "Project Takeaways and Best Practices",
+        body: "• Startup Sequencing: Always start the Config Server and Discovery Server first. These are prerequisite dependencies for the business microservices.\n• Resource Allocation: Multi-container environments demand high memory overhead. Monitor your host resources to avoid startup bottlenecks.\n• Service Readiness: Do not rely solely on the console log for service availability. Use the Eureka Dashboard to verify that a service is registered and available to the API Gateway.\n• Profile-Based Configuration: Leverage Spring Profiles (local, docker, mysql) to switch between environment-specific behaviors without code changes."
+      }
+    ]
+  },
+  {
     id: "gitops-argocd-openshift",
     title: "Zero-Downtime Deployments with GitOps: Lessons from OpenShift Production",
     date: "March 15, 2024",

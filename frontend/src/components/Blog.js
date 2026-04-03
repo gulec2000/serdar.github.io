@@ -73,6 +73,19 @@ function BlogCard({ post, readMoreLabel, readLessLabel }) {
             className="overflow-hidden"
           >
             <div className="border-t border-zinc-800 px-6 py-6 flex flex-col gap-8">
+              
+              {/* --- NEW: Image Render Block --- */}
+              {post.image && (
+                <div className="w-full">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-auto rounded-sm border border-zinc-700/50"
+                  />
+                </div>
+              )}
+              {/* ------------------------------- */}
+
               {post.sections.map((section, idx) => (
                 <div key={idx}>
                   <h4 className="font-heading text-sm font-bold text-amber-500 uppercase tracking-wide mb-3">
@@ -81,7 +94,8 @@ function BlogCard({ post, readMoreLabel, readLessLabel }) {
                   {section.body.split("\n\n").map((para, pIdx) => (
                     <p
                       key={pIdx}
-                      className="font-mono text-sm text-zinc-300 leading-relaxed mb-3 last:mb-0"
+                      // --- NEW: Added 'whitespace-pre-line' to support bullet points/code formatting ---
+                      className="font-mono text-sm text-zinc-300 leading-relaxed mb-3 last:mb-0 whitespace-pre-line"
                     >
                       {para}
                     </p>
