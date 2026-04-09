@@ -3,8 +3,7 @@ import { useLang } from "@/context/LanguageContext";
 import { contactInfo } from "@/data/translations";
 import { Menu, X, Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-// 1. Add this import at the top of Hero.js and Sidebar.js
-// (Make sure the relative path string is correct based on where the component is)
+import VisitorCounter from "./VisitorCounter"; // Import the new component
 import myCV from '../Serdar_Gulec_CV.pdf'; 
 
 const navKeys = ["about", "experience", "projects", "skills", "blog", "contact"];
@@ -84,6 +83,7 @@ export default function Sidebar() {
           <NavLinks />
         </div>
         <div className="flex flex-col gap-5">
+          <VisitorCounter /> {/* Real-time counter added here */}
           <LangToggle />
           <a
             href={myCV}
@@ -129,6 +129,9 @@ export default function Sidebar() {
             className="md:hidden fixed inset-0 top-14 bg-black/98 z-40 flex flex-col items-center justify-center gap-6"
           >
           <NavLinks onClick={() => setMobileOpen(false)} />
+            <div className="w-full max-w-[200px]">
+              <VisitorCounter /> {/* Also added to mobile menu */}
+            </div>
             <a
               href={myCV}
               download="Serdar_Gulec_CV.pdf"
