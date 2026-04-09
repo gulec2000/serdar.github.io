@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { db } from "../firebase";
+import { db } from "firebase";
 import { collection, query, orderBy, limit, onSnapshot } from "firebase/firestore";
 import * as d3 from "d3";
 import * as topojson from "topojson-client";
