@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { db } from "firebase";
+import { db } from "../firebase";
 import { getFirestore, doc, onSnapshot, setDoc, updateDoc, increment, serverTimestamp } from "firebase/firestore";
 import { Users } from "lucide-react";
 
