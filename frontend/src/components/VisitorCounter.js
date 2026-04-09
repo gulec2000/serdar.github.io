@@ -12,28 +12,34 @@ const firebaseConfig = {
   appId: "1:153592606800:web:8843be7537943391e3a155"
 };
 
-// Safe initialization
-const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// Safe initialization helper
+const getDb = () => {
+  const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+  return getFirestore(app);
+};
 
 export default function VisitorCounter() {
   const [count, setCount] = useState(null);
 
   useEffect(() => {
+    const db = getDb();
+    const statsRef = doc(db, "stats", "global");
+
     const trackVisitor = async () => {
       const sessionKey = 'visitor_tracked_portfolio';
-      if (localStorage.getItem(sessionKey)) {
-        console.log("Visitor already tracked this session.");
-        return;
-      }
+      if (localStorage.getItem(sessionKey)) return;
 
       try {
+        // 1. Get Location
         const response = await fetch('https://ipapi.co/json/');
-        const data = await response.json();
-        const visitorId = crypto.randomUUID();
+        const data = await response.ok ? await response.json() : {};
         
-        console.log("Tracking new visitor from:", data.city);
+        // 2. Generate ID (with fallback for non-HTTPS or older browsers)
+        const visitorId = (typeof crypto !== 'undefined' && crypto.randomUUID) 
+          ? crypto.randomUUID() 
+          : Math.random().toString(36).substring(2) + Date.now().toString(36);
 
+        // 3. Save Visitor Record
         await setDoc(doc(db, "visitors", visitorId), {
           id: visitorId,
           timestamp: serverTimestamp(),
@@ -43,34 +49,34 @@ export default function VisitorCounter() {
           lng: data.longitude || 0
         });
 
-        const statsRef = doc(db, "stats", "global");
-        await updateDoc(statsRef, {
-          totalVisitors: increment(1)
-        }).catch(async (err) => {
+        // 4. Update Global Counter
+        try {
+          await updateDoc(statsRef, {
+            totalVisitors: increment(1)
+          });
+        } catch (err) {
           if (err.code === 'not-found') {
             await setDoc(statsRef, { totalVisitors: 1 });
-          } else {
-            throw err;
           }
-        });
+        }
 
         localStorage.setItem(sessionKey, 'true');
       } catch (error) {
-        console.error('Visitor tracking error:', error);
+        console.error('Tracking Error:', error);
       }
     };
 
     trackVisitor();
 
-    const unsubscribe = onSnapshot(doc(db, "stats", "global"), (docSnap) => {
+    // Real-time Listener
+    const unsubscribe = onSnapshot(statsRef, (docSnap) => {
       if (docSnap.exists()) {
         setCount(docSnap.data().totalVisitors);
       } else {
-        console.log("Stats document does not exist yet.");
         setCount(0);
       }
-    }, (error) => {
-      console.error("Listener error:", error);
+    }, (err) => {
+      console.error("Firestore Listener Error:", err);
     });
 
     return () => unsubscribe();
