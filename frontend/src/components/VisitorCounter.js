@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore, doc, onSnapshot, setDoc, updateDoc, increment, serverTimestamp } from "firebase/firestore";
 import { Users } from "lucide-react";
 
@@ -9,11 +9,11 @@ const firebaseConfig = {
   projectId: "porrtfolio-visitor-counter",
   storageBucket: "porrtfolio-visitor-counter.firebasestorage.app",
   messagingSenderId: "153592606800",
-  appId: "1:153592606800:web:8843be7537943391e3a155",
-  measurementId: "G-XHLZW0K026"
+  appId: "1:153592606800:web:8843be7537943391e3a155"
 };
 
-const app = initializeApp(firebaseConfig);
+// Safe initialization
+const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 export default function VisitorCounter() {
@@ -22,39 +22,55 @@ export default function VisitorCounter() {
   useEffect(() => {
     const trackVisitor = async () => {
       const sessionKey = 'visitor_tracked_portfolio';
-      if (localStorage.getItem(sessionKey)) return;
+      if (localStorage.getItem(sessionKey)) {
+        console.log("Visitor already tracked this session.");
+        return;
+      }
 
       try {
         const response = await fetch('https://ipapi.co/json/');
         const data = await response.json();
         const visitorId = crypto.randomUUID();
         
+        console.log("Tracking new visitor from:", data.city);
+
         await setDoc(doc(db, "visitors", visitorId), {
           id: visitorId,
           timestamp: serverTimestamp(),
           country: data.country_name || 'Unknown',
           city: data.city || 'Unknown',
           lat: data.latitude || 0,
-          lng: data.longitude || 0,
-          userAgent: navigator.userAgent
+          lng: data.longitude || 0
         });
 
-        await updateDoc(doc(db, "stats", "global"), {
+        const statsRef = doc(db, "stats", "global");
+        await updateDoc(statsRef, {
           totalVisitors: increment(1)
         }).catch(async (err) => {
           if (err.code === 'not-found') {
-            await setDoc(doc(db, "stats", "global"), { totalVisitors: 1 });
+            await setDoc(statsRef, { totalVisitors: 1 });
+          } else {
+            throw err;
           }
         });
 
         localStorage.setItem(sessionKey, 'true');
-      } catch (error) { console.error('Tracking failed:', error); }
+      } catch (error) {
+        console.error('Visitor tracking error:', error);
+      }
     };
 
     trackVisitor();
 
     const unsubscribe = onSnapshot(doc(db, "stats", "global"), (docSnap) => {
-      if (docSnap.exists()) setCount(docSnap.data().totalVisitors);
+      if (docSnap.exists()) {
+        setCount(docSnap.data().totalVisitors);
+      } else {
+        console.log("Stats document does not exist yet.");
+        setCount(0);
+      }
+    }, (error) => {
+      console.error("Listener error:", error);
     });
 
     return () => unsubscribe();
