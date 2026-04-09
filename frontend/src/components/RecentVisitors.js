@@ -15,7 +15,6 @@ const firebaseConfig = {
 };
 
 const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
 export default function RecentVisitors() {
   const [visitors, setVisitors] = useState([]);
