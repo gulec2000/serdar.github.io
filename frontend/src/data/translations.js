@@ -402,7 +402,7 @@ export const contactInfo = {
   socials: [
     { name: "GitHub", url: "https://github.com/gulec2000", icon: "fa-brands fa-github" },
     { name: "LinkedIn", url: "https://www.linkedin.com/in/gulecserdar/", icon: "fa-brands fa-linkedin-in" },
-    { name: "Instagram", url: "https://www.instagram.com/serdarnepal/", icon: "fa-brands fa-instagram" },
+    { name: "Instagram", url: "https://www.instagram.com/serdar_devops/", icon: "fa-brands fa-instagram" },
     { name: "Facebook", url: "https://www.facebook.com/gulecserdar/", icon: "fa-brands fa-facebook-f" },
     { name: "Twitter", url: "https://twitter.com/home", icon: "fa-brands fa-x-twitter" },
   ],
