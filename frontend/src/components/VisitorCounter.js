@@ -23,7 +23,6 @@ export default function VisitorCounter() {
   const [count, setCount] = useState(null);
 
   useEffect(() => {
-    const db = getDb();
     const statsRef = doc(db, "stats", "global");
 
     const trackVisitor = async () => {
