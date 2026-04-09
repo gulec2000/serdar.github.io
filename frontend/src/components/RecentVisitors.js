@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { db } from "../firebaseConfig";
+import { db } from "../firebaseConfig.ts";
 import { getFirestore, collection, query, orderBy, limit, onSnapshot } from "firebase/firestore";
 import { Globe } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
