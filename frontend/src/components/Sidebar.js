@@ -7,7 +7,7 @@ import VisitorCounter from "../VisitorCounter";
 
 const navKeys = ["about", "experience", "projects", "skills", "blog", "contact"];
 
-function NavLinks({ onClick }: { onClick?: () => void }) {
+function NavLinks({ onClick }) {
   const { t } = useLang();
   const nav = t.nav as any;
   return (
