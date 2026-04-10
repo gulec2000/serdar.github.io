@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useLang } from "../context/LanguageContext";
 import { contactInfo } from "../data/translations";
 import { Menu, X, Download } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import VisitorCounter from "../VisitorCounter"; 
 
 const navKeys = ["about", "experience", "projects", "skills", "blog", "contact"];
 
 function NavLinks({ onClick }: { onClick?: () => void }) {
   const { t } = useLang();
+  const nav = t.nav as any;
   return (
     <nav className="flex flex-col gap-1">
       {navKeys.map((key) => (
@@ -19,7 +20,7 @@ function NavLinks({ onClick }: { onClick?: () => void }) {
           onClick={onClick}
           className="nav-link font-mono text-xs tracking-[0.2em] uppercase text-zinc-400 hover:text-amber-400 transition-colors py-2 px-3 rounded-sm hover:bg-zinc-900"
         >
-          {t.nav[key as keyof typeof t.nav]}
+          {nav[key]}
         </a>
       ))}
     </nav>
