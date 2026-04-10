@@ -3,7 +3,7 @@ import { useLang } from "../context/LanguageContext";
 import { contactInfo } from "../data/translations";
 import { Menu, X, Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import VisitorCounter from "../VisitorCounter"; 
+import VisitorCounter from "./VisitorCounter"; 
 
 const navKeys = ["about", "experience", "projects", "skills", "blog", "contact"];
 
