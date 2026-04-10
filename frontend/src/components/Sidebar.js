@@ -9,7 +9,7 @@ const navKeys = ["about", "experience", "projects", "skills", "blog", "contact"]
 
 function NavLinks({ onClick }) {
   const { t } = useLang();
-  const nav = t.nav as any;
+  const nav = t.nav;
   return (
     <nav className="flex flex-col gap-1">
       {navKeys.map((key) => (

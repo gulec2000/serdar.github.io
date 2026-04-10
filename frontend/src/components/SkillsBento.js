@@ -21,12 +21,6 @@ const SkillCard = ({
   className = "", 
   children,
   delay = 0 
-}: { 
-  title: string; 
-  icon: any; 
-  className?: string; 
-  children?: React.ReactNode;
-  delay?: number;
 }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -203,7 +197,7 @@ export default function SkillsBento() {
             </h3>
             <div className="h-px w-12 bg-amber-500 mb-6" />
             <div className="flex flex-wrap gap-2">
-              {t.skills.certifications.map((cert: string) => (
+              {t.skills.certifications.map((cert) => (
                 <span
                   key={cert}
                   className="font-mono text-[11px] tracking-wider text-amber-500/80 border border-zinc-800 bg-[#121212]/60 px-3 py-1.5 rounded-sm hover:border-amber-500/40 hover:bg-[#121212] transition-colors cursor-default flex items-center"
