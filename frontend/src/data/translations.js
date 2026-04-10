@@ -47,7 +47,7 @@ const translations = {
             "Operated and managed CI/CD pipelines on Microsoft Azure DevOps Platform for digital modernization of government processes.",
             "Set up OpenShift Container Platform as test environment; configured SCM and integrated Azure DevOps with OpenShift and SonarQube.",
             "Built AWS resources as Infrastructure as Code (IaC) with Terraform for a Deal and Bid Management Platform.",
-            "Designed a managed AWS IoT Architecture (POC) using IoT Core for LoRaWAN, DocumentDB, Aurora Serverless, Kinesis, S3, API Gateway, and Lambda.",
+            "Designed a managed AWS IoT Architecture (POC) using IoT Core for LoRaWAN, DocumentDB, Aurora Serverless, Kinesis, S3, API Gateway and Lambda.",
             "Authored comprehensive documentation for AWS, Terraform, and operational resources.",
           ],
         },
@@ -278,7 +278,7 @@ const translations = {
         {
           id: "phonebook-k8s",
           title: "Phonebook-Microservice auf Kubernetes",
-          desc: "Microservice-Webanwendung mit MySQL unter Verwendung von Docker und Kubernetes mit Persistent Volumes.",
+          desc: "Microservice-Webanwendung mit MySQL unter Verwendung von Docker und Kubernetes with Persistent Volumes.",
           url: "https://github.com/gulec2000/203-Kubernetes-Microservice-Phonebook",
           img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_203.png",
           tags: ["Kubernetes", "Docker", "Python", "MySQL"],

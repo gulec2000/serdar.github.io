@@ -1,17 +1,18 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { useLang } from "../context/LanguageContext";
 import { 
-  Code2, 
-  Cpu, 
   Globe, 
   Layers, 
-  Layout, 
-  MessageSquare, 
-  Smartphone, 
   Zap,
   Terminal,
   Database,
-  Palette
+  Cloud,
+  ShieldCheck,
+  Activity,
+  Anchor,
+  GitBranch,
+  Settings
 } from 'lucide-react';
 
 const SkillCard = ({ 
@@ -52,118 +53,168 @@ const SkillCard = ({
 );
 
 export default function SkillsBento() {
+  const { t } = useLang();
+
   return (
-    <section className="py-24 px-6 max-w-7xl mx-auto">
-      <div className="mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 uppercase tracking-tighter">
-          Technical <span className="text-amber-500">Arsenal</span>
-        </h2>
-        <p className="text-zinc-400 max-w-2xl font-mono text-sm">
-          A curated selection of technologies and tools I use to bring digital experiences to life.
-        </p>
+    <section id="skills" className="py-24 md:py-32 px-6 md:px-12 border-t border-zinc-800 relative overflow-hidden">
+      {/* Subtle background texture */}
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-3 gap-4 h-auto md:h-[800px]">
-        {/* Main Skill - React/Frontend (Large) */}
-        <SkillCard 
-          title="Frontend Engineering" 
-          icon={Layout} 
-          className="md:col-span-2 md:row-span-2"
-          delay={0.1}
-        >
-          <p className="text-zinc-400 text-sm mb-6">
-            Building highly interactive, performant, and accessible user interfaces using modern frameworks.
-          </p>
-          <div className="bg-zinc-950 rounded-xl p-4 border border-zinc-800 font-mono text-[11px] text-zinc-500 overflow-hidden">
-            <div className="flex gap-2 mb-2">
-              <div className="w-2 h-2 rounded-full bg-red-500/50" />
-              <div className="w-2 h-2 rounded-full bg-amber-500/50" />
-              <div className="w-2 h-2 rounded-full bg-green-500/50" />
-            </div>
-            <code className="block">
-              <span className="text-purple-400">const</span> <span className="text-blue-400">Portfolio</span> = () =&gt; &#123; <br />
-              &nbsp;&nbsp;<span className="text-purple-400">return</span> (<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;&lt;<span className="text-amber-500">motion.div</span><br />
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-blue-300">animate</span>=&#123;&#123; <span className="text-blue-300">scale</span>: <span className="text-orange-400">1</span> &#125;&#125;<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-blue-300">whileHover</span>=&#123;&#123; <span className="text-blue-300">y</span>: -<span className="text-orange-400">5</span> &#125;&#125;<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;/&gt;<br />
-              &nbsp;&nbsp;);<br />
-              &#125;;
-            </code>
-          </div>
-        </SkillCard>
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="mb-12">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-heading text-3xl sm:text-4xl font-bold uppercase tracking-tight text-white mb-2"
+          >
+            {t.skills.title}
+          </motion.h2>
+          <p className="font-mono text-sm text-zinc-500 mb-4">{t.skills.subtitle}</p>
+          <div className="h-px w-16 bg-amber-500 mb-12" />
+        </div>
 
-        {/* Performance (Medium) */}
-        <SkillCard 
-          title="Optimization" 
-          icon={Zap} 
-          className="md:col-span-2 md:row-span-1"
-          delay={0.2}
-        >
-          <div className="flex items-end gap-4">
-            <div className="flex-1">
-              <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-3 gap-4 h-auto md:h-[850px]">
+          {/* Main Skill - Platform Engineering (Large) */}
+          <SkillCard 
+            title="Platform Engineering" 
+            icon={Cloud} 
+            className="md:col-span-2 md:row-span-2"
+            delay={0.1}
+          >
+            <p className="text-zinc-400 text-sm mb-6">
+              Orchestrating mission-critical workloads on OpenShift and Kubernetes with a focus on high availability and scalability.
+            </p>
+            <div className="bg-zinc-950 rounded-xl p-4 border border-zinc-800 font-mono text-[11px] text-zinc-500 overflow-hidden">
+              <div className="flex items-center justify-between mb-3 border-b border-zinc-800 pb-2">
+                <span className="text-amber-500/80">cluster-status.sh</span>
+                <div className="flex gap-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                  <span className="text-[9px] text-green-500/70 uppercase">Healthy</span>
+                </div>
+              </div>
+              <div className="space-y-1">
+                <div className="flex justify-between">
+                  <span>Nodes:</span>
+                  <span className="text-zinc-300">Ready (12/12)</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Deployments:</span>
+                  <span className="text-zinc-300">Synced (ArgoCD)</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Operators:</span>
+                  <span className="text-zinc-300">Up-to-date</span>
+                </div>
+              </div>
+            </div>
+          </SkillCard>
+
+          {/* Infrastructure as Code (Medium) */}
+          <SkillCard 
+            title="Infrastructure as Code" 
+            icon={Layers} 
+            className="md:col-span-2 md:row-span-1"
+            delay={0.2}
+          >
+            <div className="bg-zinc-950 rounded-xl p-3 border border-zinc-800 font-mono text-[10px] text-zinc-500">
+              <code className="block">
+                <span className="text-purple-400">resource</span> <span className="text-amber-500">"aws_instance"</span> <span className="text-blue-400">"web"</span> &#123;<br />
+                &nbsp;&nbsp;<span className="text-zinc-400">ami</span> = <span className="text-green-400">data.ami.id</span><br />
+                &nbsp;&nbsp;<span className="text-zinc-400">instance_type</span> = <span className="text-green-400">"t3.medium"</span><br />
+                &#125;
+              </code>
+            </div>
+          </SkillCard>
+
+          {/* CI/CD & GitOps (Small) */}
+          <SkillCard 
+            title="GitOps & CI/CD" 
+            icon={GitBranch} 
+            delay={0.3}
+          >
+            <div className="flex items-center gap-2 mt-2">
+              <div className="flex -space-x-2">
+                <div className="w-6 h-6 rounded-full bg-zinc-800 border border-zinc-900 flex items-center justify-center text-[8px] text-zinc-400">Git</div>
+                <div className="w-6 h-6 rounded-full bg-zinc-800 border border-zinc-900 flex items-center justify-center text-[8px] text-zinc-400">Argo</div>
+                <div className="w-6 h-6 rounded-full bg-zinc-800 border border-zinc-900 flex items-center justify-center text-[8px] text-zinc-400">Helm</div>
+              </div>
+            </div>
+          </SkillCard>
+
+          {/* Monitoring (Small) */}
+          <SkillCard 
+            title="Observability" 
+            icon={Activity} 
+            delay={0.4}
+          >
+            <div className="mt-2 h-8 flex items-end gap-0.5">
+              {[40, 70, 45, 90, 65, 80, 50, 85].map((h, i) => (
                 <motion.div 
-                  initial={{ width: 0 }}
-                  whileInView={{ width: '98%' }}
-                  transition={{ duration: 1.5, delay: 0.5 }}
-                  className="h-full bg-amber-500"
+                  key={i}
+                  initial={{ height: 0 }}
+                  whileInView={{ height: `${h}%` }}
+                  transition={{ duration: 0.5, delay: 0.5 + (i * 0.05) }}
+                  className="flex-1 bg-amber-500/40 rounded-t-sm"
                 />
-              </div>
-              <div className="flex justify-between mt-2 font-mono text-[10px] text-zinc-500 uppercase">
-                <span>Lighthouse Score</span>
-                <span className="text-amber-500">98/100</span>
-              </div>
+              ))}
+            </div>
+          </SkillCard>
+
+          {/* Automation (Small) */}
+          <SkillCard 
+            title="Automation" 
+            icon={Terminal} 
+            className="md:col-span-1 md:row-span-1"
+            delay={0.5}
+          />
+
+          {/* Cloud Providers (Medium) */}
+          <SkillCard 
+            title="Cloud Ecosystem" 
+            icon={Globe} 
+            className="md:col-span-2 md:row-span-1"
+            delay={0.6}
+          >
+            <div className="flex flex-wrap gap-2 mt-2">
+              {['AWS', 'Azure', 'OpenShift', 'GitLab'].map(tag => (
+                <span key={tag} className="px-2 py-1 bg-zinc-800/50 rounded-md text-[10px] font-mono text-zinc-400 border border-zinc-700/50">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </SkillCard>
+
+          {/* Security (Small) */}
+          <SkillCard 
+            title="Cloud Security" 
+            icon={ShieldCheck} 
+            delay={0.7}
+          />
+        </div>
+
+        {/* Certifications */}
+        {t.skills.certifications && (
+          <div className="mt-16">
+            <h3 className="font-heading text-xl font-bold uppercase tracking-tight text-white mb-2">
+              {t.skills.certTitle}
+            </h3>
+            <div className="h-px w-12 bg-amber-500 mb-6" />
+            <div className="flex flex-wrap gap-2">
+              {t.skills.certifications.map((cert: string) => (
+                <span
+                  key={cert}
+                  className="font-mono text-[11px] tracking-wider text-amber-500/80 border border-zinc-800 bg-[#121212]/60 px-3 py-1.5 rounded-sm hover:border-amber-500/40 hover:bg-[#121212] transition-colors cursor-default flex items-center"
+                >
+                  <ShieldCheck size={10} className="mr-1.5 opacity-60" />
+                  {cert}
+                </span>
+              ))}
             </div>
           </div>
-        </SkillCard>
-
-        {/* Architecture (Small) */}
-        <SkillCard 
-          title="Architecture" 
-          icon={Layers} 
-          delay={0.3}
-        />
-
-        {/* Backend (Small) */}
-        <SkillCard 
-          title="Backend" 
-          icon={Database} 
-          delay={0.4}
-        />
-
-        {/* Mobile (Small) */}
-        <SkillCard 
-          title="Mobile First" 
-          icon={Smartphone} 
-          className="md:col-span-1 md:row-span-1"
-          delay={0.5}
-        />
-
-        {/* Design (Medium) */}
-        <SkillCard 
-          title="UI/UX Design" 
-          icon={Palette} 
-          className="md:col-span-2 md:row-span-1"
-          delay={0.6}
-        >
-          <div className="flex gap-2 mt-2">
-            {['#F59E0B', '#18181B', '#27272A', '#3F3F46'].map(color => (
-              <div 
-                key={color} 
-                className="w-6 h-6 rounded-lg border border-white/10" 
-                style={{ backgroundColor: color }} 
-              />
-            ))}
-          </div>
-        </SkillCard>
-
-        {/* Terminal/DevOps (Small) */}
-        <SkillCard 
-          title="DevOps" 
-          icon={Terminal} 
-          delay={0.7}
-        />
+        )}
       </div>
     </section>
   );

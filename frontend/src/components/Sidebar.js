@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { useLang } from "@/context/LanguageContext";
-import { contactInfo } from "@/data/translations";
+import { useLang } from "../context/LanguageContext";
+import { contactInfo } from "../data/translations";
 import { Menu, X, Download } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import VisitorCounter from "./VisitorCounter"; // Import the new component
-import myCV from '../Serdar_Gulec_CV.pdf'; 
+import { motion, AnimatePresence } from "motion/react";
+import VisitorCounter from "../VisitorCounter"; 
 
 const navKeys = ["about", "experience", "projects", "skills", "blog", "contact"];
 
-function NavLinks({ onClick }) {
+function NavLinks({ onClick }: { onClick?: () => void }) {
   const { t } = useLang();
   return (
     <nav className="flex flex-col gap-1">
@@ -20,7 +19,7 @@ function NavLinks({ onClick }) {
           onClick={onClick}
           className="nav-link font-mono text-xs tracking-[0.2em] uppercase text-zinc-400 hover:text-amber-400 transition-colors py-2 px-3 rounded-sm hover:bg-zinc-900"
         >
-          {t.nav[key]}
+          {t.nav[key as keyof typeof t.nav]}
         </a>
       ))}
     </nav>
@@ -83,11 +82,10 @@ export default function Sidebar() {
           <NavLinks />
         </div>
         <div className="flex flex-col gap-5">
-          <VisitorCounter /> {/* Real-time counter added here */}
+          <VisitorCounter />
           <LangToggle />
           <a
-            href={myCV}
-            download="Serdar_Gulec_CV.pdf"
+            href="#"
             data-testid="cv-download-button"
             className="flex items-center gap-2 border border-zinc-700 hover:border-amber-500/60 text-zinc-400 hover:text-amber-400 font-mono text-xs tracking-wider uppercase px-3 py-2 rounded-sm transition-colors"
           >
@@ -130,11 +128,10 @@ export default function Sidebar() {
           >
           <NavLinks onClick={() => setMobileOpen(false)} />
             <div className="w-full max-w-[200px]">
-              <VisitorCounter /> {/* Also added to mobile menu */}
+              <VisitorCounter />
             </div>
             <a
-              href={myCV}
-              download="Serdar_Gulec_CV.pdf"
+              href="#"
               onClick={() => setMobileOpen(false)}
               className="flex items-center gap-2 border border-zinc-700 text-zinc-400 hover:text-amber-400 font-mono text-xs tracking-wider uppercase px-4 py-2.5 rounded-sm transition-colors"
             >
