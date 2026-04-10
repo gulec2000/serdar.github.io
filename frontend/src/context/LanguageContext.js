@@ -1,10 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import translations from '../data/translations';
 
 const LanguageContext = createContext(undefined);
 
 export const LanguageProvider = ({ children }) => {
-  const [lang, setLang] = useState<Language>('en');
+  const [lang, setLang] = useState('en');
 
   const toggleLang = () => {
     setLang((prev) => (prev === 'en' ? 'de' : 'en'));
