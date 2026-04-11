@@ -1,0 +1,5 @@
+{
+  "name": "Visitor Analytics Dashboard",
+  "description": "A real-time visitor counter and map visualization dashboard for tracking website traffic and locations.",
+  "requestFramePermissions": []
+}

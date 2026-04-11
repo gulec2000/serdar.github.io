@@ -1,23 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { initializeApp, getApps, getApp } from "firebase/app";
-import { db } from "../firebaseConfig.ts";
-import { getFirestore, doc, onSnapshot, setDoc, updateDoc, increment, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebaseConfig";
+import { doc, onSnapshot, setDoc, updateDoc, increment, serverTimestamp } from "firebase/firestore";
 import { Users } from "lucide-react";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCP85yvORfDxP-AVVfePrJBxwr4toaXQzg",
-  authDomain: "porrtfolio-visitor-counter.firebaseapp.com",
-  projectId: "porrtfolio-visitor-counter",
-  storageBucket: "porrtfolio-visitor-counter.firebasestorage.app",
-  messagingSenderId: "153592606800",
-  appId: "1:153592606800:web:8843be7537943391e3a155"
-};
-
-// Safe initialization helper
-const getDb = () => {
-  const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
-  return getFirestore(app);
-};
 
 export default function VisitorCounter() {
   const [count, setCount] = useState(null);
@@ -34,7 +18,7 @@ export default function VisitorCounter() {
         const response = await fetch('https://ipapi.co/json/');
         const data = await response.ok ? await response.json() : {};
         
-        // 2. Generate ID (with fallback for non-HTTPS or older browsers)
+        // 2. Generate ID
         const visitorId = (typeof crypto !== 'undefined' && crypto.randomUUID) 
           ? crypto.randomUUID() 
           : Math.random().toString(36).substring(2) + Date.now().toString(36);

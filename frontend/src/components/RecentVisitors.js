@@ -1,29 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { initializeApp, getApps, getApp } from "firebase/app";
-import { db } from "../firebaseConfig.ts";
-import { getFirestore, collection, query, orderBy, limit, onSnapshot } from "firebase/firestore";
-import { Globe } from "lucide-react";
+import { db } from "../firebaseConfig";
+import { collection, query, orderBy, limit, onSnapshot } from "firebase/firestore";
+import { MapPin, Globe } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCP85yvORfDxP-AVVfePrJBxwr4toaXQzg",
-  authDomain: "porrtfolio-visitor-counter.firebaseapp.com",
-  projectId: "porrtfolio-visitor-counter",
-  storageBucket: "porrtfolio-visitor-counter.firebasestorage.app",
-  messagingSenderId: "153592606800",
-  appId: "1:153592606800:web:8843be7537943391e3a155"
-};
-
-const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 
 export default function RecentVisitors() {
   const [visitors, setVisitors] = useState([]);
 
   useEffect(() => {
-    const q = query(collection(db, "visitors"), orderBy("timestamp", "desc"), limit(5));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      setVisitors(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-    });
+    const q = query(
+      collection(db, "visitors"),
+      orderBy("timestamp", "desc"),
+      limit(5)
+    );
+
+    const unsubscribe = onSnapshot(q, 
+      (snapshot) => {
+        const docs = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        console.log("RecentVisitors data received:", docs.length, "items");
+        setVisitors(docs);
+      },
+      (error) => {
+        console.error("RecentVisitors Listener Error:", error);
+        // If index is missing, Firestore provides a link in the console
+      }
+    );
+
     return () => unsubscribe();
   }, []);
 
@@ -40,6 +45,7 @@ export default function RecentVisitors() {
               key={v.id}
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
               className="flex items-center gap-3 group"
             >
               <div className="w-1.5 h-1.5 rounded-full bg-amber-500/40 group-hover:bg-amber-500 transition-colors" />
@@ -48,9 +54,17 @@ export default function RecentVisitors() {
                   {v.city}, {v.country}
                 </p>
               </div>
+              <span className="font-mono text-[9px] text-zinc-600 uppercase">
+                {v.timestamp?.toDate() ? new Intl.RelativeTimeFormat('en', { style: 'short' }).format(
+                  Math.ceil((v.timestamp.toDate().getTime() - Date.now()) / 60000), 'minute'
+                ).replace('in 0 min', 'now') : 'now'}
+              </span>
             </motion.div>
           ))}
         </AnimatePresence>
+        {visitors.length === 0 && (
+          <p className="font-mono text-[10px] text-zinc-600 italic">Waiting for traffic...</p>
+        )}
       </div>
     </div>
   );

@@ -1,0 +1,37 @@
+{
+  "entities": {
+    "Visitor": {
+      "title": "Visitor",
+      "description": "A record of a unique visitor session.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique session ID" },
+        "timestamp": { "type": "string", "format": "date-time", "description": "Time of visit" },
+        "country": { "type": "string", "description": "Country of the visitor" },
+        "city": { "type": "string", "description": "City of the visitor" },
+        "lat": { "type": "number", "description": "Latitude" },
+        "lng": { "type": "number", "description": "Longitude" },
+        "userAgent": { "type": "string", "description": "Browser user agent" }
+      },
+      "required": ["id", "timestamp"]
+    },
+    "Stats": {
+      "title": "Stats",
+      "description": "Aggregated statistics.",
+      "type": "object",
+      "properties": {
+        "totalVisitors": { "type": "number", "description": "Total unique visitors" }
+      }
+    }
+  },
+  "firestore": {
+    "/visitors/{visitorId}": {
+      "schema": "Visitor",
+      "description": "Collection of individual visitor records."
+    },
+    "/stats/global": {
+      "schema": "Stats",
+      "description": "Global aggregate statistics."
+    }
+  }
+}

@@ -158,6 +158,30 @@ const blogPosts = [
       },
     ],
   },
+  {
+    id: 1,
+    title: "The Future of GitOps in Public Sector",
+    excerpt: "Exploring how automated OpenShift platforms are revolutionizing digital modernization in government agencies.",
+    date: "2024-03-15",
+    category: "Platform Engineering",
+    readTime: "8 min read",
+    content: `
+      ## Introduction
+      Digital modernization in the public sector has long been a challenge...
+    `
+  },
+  {
+    id: 2,
+    title: "Terraform Best Practices for AWS IoT",
+    excerpt: "A deep dive into managing complex IoT architectures using Infrastructure as Code and modular Terraform patterns.",
+    date: "2024-02-28",
+    category: "Cloud & IaC",
+    readTime: "12 min read",
+    content: `
+      ## The IoT Challenge
+      Managing IoT infrastructure at scale requires a robust approach...
+    `
+  }
 ];
 
 export default blogPosts;

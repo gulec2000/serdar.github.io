@@ -1,63 +1,55 @@
-/* Layout */
 .app-layout {
+  display: flex;
   min-height: 100vh;
-  background-color: #0A0A0A;
+  background-color: #09090b;
 }
 
 .main-content {
-  margin-left: 0;
+  flex: 1;
+  margin-left: 280px;
+  min-width: 0;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
+  .app-layout {
+    flex-direction: column;
+  }
+  
   .main-content {
-    margin-left: 256px;
+    margin-left: 0;
+    padding-top: 64px;
   }
 }
 
-/* Typewriter cursor blink */
-.typewriter::after {
-  content: "_";
-  animation: blink 1s step-end infinite;
-  color: #F5A623;
-}
-
-@keyframes blink {
-  50% { opacity: 0; }
-}
-
-/* Timeline glow */
-.timeline-glow {
-  box-shadow: 0 0 8px rgba(245, 166, 35, 0.3);
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
-}
-
-/* Custom scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0A0A0A;
+  background: #09090b;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #262626;
+  background: #27272a;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #404040;
+  background: #3f3f46;
 }
 
-/* Line clamp */
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+/* Typography */
+.font-heading {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Animations */
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

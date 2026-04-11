@@ -1,146 +1,115 @@
-import { useState } from "react";
-import { useLang } from "@/context/LanguageContext";
-import blogPosts from "@/data/blogPosts";
+import React, { useState } from "react";
+import { useLang } from "../context/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ChevronUp, Clock, Calendar } from "lucide-react";
-
-function BlogCard({ post, readMoreLabel, readLessLabel }) {
-  const [expanded, setExpanded] = useState(false);
-
-  return (
-    <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="border border-zinc-800 rounded-sm bg-zinc-900/30 hover:border-zinc-700 transition-colors"
-      data-testid={`blog-card-${post.id}`}
-    >
-      {/* Card Header */}
-      <div className="p-6">
-        {/* Meta row */}
-        <div className="flex flex-wrap items-center gap-4 mb-3">
-          <span className="flex items-center gap-1.5 font-mono text-xs text-zinc-500">
-            <Calendar size={11} />
-            {post.date}
-          </span>
-          <span className="flex items-center gap-1.5 font-mono text-xs text-zinc-500">
-            <Clock size={11} />
-            {post.readTime}
-          </span>
-        </div>
-
-        {/* Title */}
-        <h3 className="font-heading text-lg font-bold text-white leading-snug mb-3 group-hover:text-amber-400 transition-colors">
-          {post.title}
-        </h3>
-
-        {/* Excerpt */}
-        <p className="font-mono text-sm text-zinc-400 leading-relaxed mb-4">
-          {post.excerpt}
-        </p>
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {post.tags.map((tag) => (
-            <span
-              key={tag}
-              className="font-mono text-xs px-2 py-0.5 border border-zinc-700 text-zinc-400 rounded-sm"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        {/* Toggle button */}
-        <button
-          onClick={() => setExpanded(!expanded)}
-          data-testid={`blog-card-toggle-${post.id}`}
-          className="flex items-center gap-1.5 font-mono text-xs tracking-wider uppercase text-amber-500 hover:text-amber-400 transition-colors font-bold"
-        >
-          {expanded ? readLessLabel : readMoreLabel}
-          {expanded ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
-        </button>
-      </div>
-
-      {/* Expandable full content */}
-      <AnimatePresence>
-        {expanded && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="overflow-hidden"
-          >
-            <div className="border-t border-zinc-800 px-6 py-6 flex flex-col gap-8">
-              
-              {/* --- NEW: Image Render Block --- */}
-              {post.image && (
-                <div className="w-full">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-auto rounded-sm border border-zinc-700/50"
-                  />
-                </div>
-              )}
-              {/* ------------------------------- */}
-
-              {post.sections.map((section, idx) => (
-                <div key={idx}>
-                  <h4 className="font-heading text-sm font-bold text-amber-500 uppercase tracking-wide mb-3">
-                    {section.heading}
-                  </h4>
-                  {section.body.split("\n\n").map((para, pIdx) => (
-                    <p
-                      key={pIdx}
-                      // --- NEW: Added 'whitespace-pre-line' to support bullet points/code formatting ---
-                      className="font-mono text-sm text-zinc-300 leading-relaxed mb-3 last:mb-0 whitespace-pre-line"
-                    >
-                      {para}
-                    </p>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.article>
-  );
-}
+import blogPosts from "../data/blogPosts";
+import { ChevronRight, X, Clock, Calendar } from "lucide-react";
 
 export default function Blog() {
   const { t } = useLang();
-  const blog = t.blog;
+  const [selectedPost, setSelectedPost] = useState(null);
 
   return (
-    <section
-      id="blog"
-      data-testid="blog-section"
-      className="py-24 md:py-32 px-6 md:px-12 border-t border-zinc-800"
-    >
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="font-heading text-3xl sm:text-4xl font-bold uppercase tracking-tight text-white mb-2"
-      >
-        {blog.title}
-      </motion.h2>
-      <p className="font-mono text-sm text-zinc-500 mb-4">{blog.subtitle}</p>
-      <div className="h-px w-16 bg-amber-500 mb-12" />
+    <section id="blog" className="py-24 md:py-32 px-6 md:px-12 border-t border-zinc-800">
+      <div className="max-w-7xl mx-auto">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="font-heading text-3xl sm:text-4xl font-bold uppercase tracking-tight text-white mb-2"
+        >
+          {t.blog.title}
+        </motion.h2>
+        <p className="font-mono text-sm text-zinc-500 mb-4">{t.blog.subtitle}</p>
+        <div className="h-px w-16 bg-amber-500 mb-12" />
 
-      <div className="flex flex-col gap-6">
-        {blogPosts.map((post) => (
-          <BlogCard
-            key={post.id}
-            post={post}
-            readMoreLabel={blog.readMore}
-            readLessLabel={blog.readLess}
-          />
-        ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {blogPosts.map((post) => (
+            <motion.div
+              key={post.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="group p-8 bg-zinc-900/30 border border-zinc-800 rounded-sm hover:border-amber-500/30 transition-all cursor-pointer"
+              onClick={() => setSelectedPost(post)}
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <span className="font-mono text-[10px] text-amber-500 uppercase tracking-[0.2em] px-2 py-1 bg-amber-500/5 border border-amber-500/10">
+                  {post.category}
+                </span>
+                <div className="flex items-center gap-2 text-zinc-600 font-mono text-[9px] uppercase">
+                  <Clock size={10} /> {post.readTime}
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-4 group-hover:text-amber-400 transition-colors">
+                {post.title}
+              </h3>
+              <p className="text-zinc-500 text-sm leading-relaxed mb-6 line-clamp-2">
+                {post.excerpt}
+              </p>
+              <div className="flex items-center gap-2 text-amber-500 font-mono text-[10px] uppercase tracking-widest">
+                {t.blog.readMore} <ChevronRight size={12} />
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
+
+      {/* Post Modal */}
+      <AnimatePresence>
+        {selectedPost && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedPost(null)}
+              className="absolute inset-0 bg-black/90 backdrop-blur-md"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-4xl max-h-[90vh] bg-zinc-950 border border-zinc-800 rounded-sm overflow-hidden flex flex-col"
+            >
+              <div className="sticky top-0 bg-zinc-950 border-b border-zinc-800 p-4 flex items-center justify-between z-10">
+                <div className="flex items-center gap-4">
+                  <span className="font-mono text-[10px] text-amber-500 uppercase tracking-[0.2em]">
+                    {selectedPost.category}
+                  </span>
+                </div>
+                <button
+                  onClick={() => setSelectedPost(null)}
+                  className="p-2 text-zinc-500 hover:text-white transition-colors"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+              <div className="overflow-y-auto p-6 md:p-12">
+                <div className="flex items-center gap-6 mb-8 text-zinc-500 font-mono text-[10px] uppercase tracking-widest">
+                  <div className="flex items-center gap-2">
+                    <Calendar size={12} /> {selectedPost.date}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock size={12} /> {selectedPost.readTime}
+                  </div>
+                </div>
+                <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 leading-tight">
+                  {selectedPost.title}
+                </h2>
+                <div className="prose prose-invert max-w-none">
+                  <p className="text-zinc-400 text-lg leading-relaxed mb-8">
+                    {selectedPost.excerpt}
+                  </p>
+                  <div className="h-px w-full bg-zinc-800 mb-8" />
+                  <div className="text-zinc-300 space-y-6 whitespace-pre-line">
+                    {selectedPost.content}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

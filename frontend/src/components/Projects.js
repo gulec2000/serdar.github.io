@@ -1,59 +1,11 @@
-import { useLang } from "@/context/LanguageContext";
+import { useLang } from "../context/LanguageContext";
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
-import { useState } from "react";
-
-function ProjectCard({ project, index }) {
-  const [imgError, setImgError] = useState(false);
-  const fallback = "https://images.pexels.com/photos/6466141/pexels-photo-6466141.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
-
-  return (
-    <motion.a
-      href={project.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.05 }}
-      data-testid={`project-card-${project.id}`}
-      className="group block border border-zinc-800 rounded-sm overflow-hidden bg-[#121212]/50 hover:border-zinc-600 hover:-translate-y-1 transition-all duration-300"
-    >
-      <div className="relative h-40 overflow-hidden bg-zinc-900">
-        <img
-          src={imgError ? fallback : project.img}
-          alt={project.title}
-          onError={() => setImgError(true)}
-          className="w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-500"
-        />
-        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-          <ExternalLink size={16} className="text-amber-400" />
-        </div>
-      </div>
-      <div className="p-4">
-        <h3 className="font-heading text-sm font-semibold text-white mb-2 leading-tight group-hover:text-amber-400 transition-colors">
-          {project.title}
-        </h3>
-        <p className="font-mono text-[11px] leading-relaxed text-zinc-500 mb-3 line-clamp-2">
-          {project.desc}
-        </p>
-        <div className="flex flex-wrap gap-1.5">
-          {project.tags.map((tag) => (
-            <span key={tag} className="font-mono text-[10px] tracking-wider text-amber-500/70 border border-zinc-800 px-2 py-0.5 rounded-sm">
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-    </motion.a>
-  );
-}
+import { ExternalLink, Github } from "lucide-react";
 
 export default function Projects() {
   const { t } = useLang();
-
   return (
-    <section id="projects" data-testid="projects-section" className="py-24 md:py-32 px-6 md:px-12 border-t border-zinc-800">
+    <section id="projects" className="py-24 md:py-32 px-6 md:px-12 border-t border-zinc-800">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -65,9 +17,41 @@ export default function Projects() {
       <p className="font-mono text-sm text-zinc-500 mb-4">{t.projects.subtitle}</p>
       <div className="h-px w-16 bg-amber-500 mb-12" />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-        {t.projects.items.map((p, i) => (
-          <ProjectCard key={p.id} project={p} index={i} />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {t.projects.items.map((project, i) => (
+          <motion.div
+            key={project.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1 }}
+            className="group bg-zinc-900/50 border border-zinc-800 rounded-sm overflow-hidden hover:border-amber-500/40 transition-colors"
+          >
+            <div className="aspect-video overflow-hidden relative">
+              <img 
+                src={project.img} 
+                alt={project.title} 
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                <a href={project.url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-amber-500 rounded-full flex items-center justify-center text-black hover:bg-amber-400 transition-colors">
+                  <ExternalLink size={18} />
+                </a>
+              </div>
+            </div>
+            <div className="p-6">
+              <h3 className="text-lg font-bold text-white mb-2 group-hover:text-amber-500 transition-colors">{project.title}</h3>
+              <p className="text-zinc-500 text-xs leading-relaxed mb-4 line-clamp-3">{project.desc}</p>
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map(tag => (
+                  <span key={tag} className="font-mono text-[10px] uppercase tracking-wider text-zinc-400 bg-zinc-800 px-2 py-1 rounded-sm">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
         ))}
       </div>
     </section>

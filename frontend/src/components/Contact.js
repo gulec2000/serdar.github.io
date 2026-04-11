@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useLang } from "@/context/LanguageContext";
-import { contactInfo } from "@/data/translations";
+import { useLang } from "../context/LanguageContext";
+import { contactInfo } from "../data/translations";
 import { motion } from "framer-motion";
 import { MapPin, Mail, Phone } from "lucide-react";
 import RecentVisitors from "./RecentVisitors";
@@ -115,7 +115,6 @@ export default function Contact() {
               <h4 className="font-mono text-xs tracking-[0.2em] uppercase text-zinc-400 mb-1">{info.address}</h4>
               <p className="font-mono text-sm text-zinc-300">{contactInfo.address.line1}</p>
               <p className="font-mono text-sm text-zinc-300">{contactInfo.address.line2}</p>
-              <p className="font-mono text-sm text-zinc-300">{contactInfo.address.line3}</p>
             </div>
           </div>
           <div className="flex gap-4">
@@ -151,6 +150,8 @@ export default function Contact() {
               ))}
             </div>
           </div>
+
+          {/* Integration: Recent Visitor Locations */}
           <RecentVisitors />
           <VisitorMap />
         </motion.div>

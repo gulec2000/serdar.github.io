@@ -1,0 +1,65 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: visitors
+    // Fields:
+    //   - id: string
+    //   - timestamp: timestamp
+    //   - country: string
+    //   - city: string
+    //   - lat: number
+    //   - lng: number
+    //   - userAgent: string
+    //
+    // Collection: stats
+    // Document: global
+    // Fields:
+    //   - totalVisitors: number
+    //
+    // ===============================================================
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isValidVisitor(data) {
+      return data.keys().hasAll(['id', 'timestamp']) &&
+             data.id is string &&
+             data.timestamp is timestamp &&
+             (!('country' in data) || data.country is string) &&
+             (!('city' in data) || data.city is string) &&
+             (!('lat' in data) || data.lat is number) &&
+             (!('lng' in data) || data.lng is number);
+    }
+
+    // Visitors collection
+    match /visitors/{visitorId} {
+      // Allow anyone to create a visitor record (for the tracking script)
+      // We limit the fields they can send to prevent abuse
+      allow create: if isValidVisitor(request.resource.data) && 
+                      request.resource.data.id == visitorId;
+      
+      // Only the dashboard (authenticated user) can read all visitors
+      allow read: if isAuthenticated();
+    }
+
+    // Stats document
+    match /stats/global {
+      // Allow anyone to read the total count
+      allow read: if true;
+      
+      // Allow anyone to increment the count (using atomic increment)
+      // In a production app, you'd use a Cloud Function to be more secure,
+      // but for this simple tracker, we'll allow a specific update.
+      allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['totalVisitors']) &&
+                      request.resource.data.totalVisitors == resource.data.totalVisitors + 1;
+      
+      // Authenticated admin can reset or manage stats
+      allow write: if isAuthenticated();
+    }
+  }
+}
