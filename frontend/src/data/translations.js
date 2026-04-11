@@ -76,6 +76,7 @@ const translations = {
           desc: "Full CI/CD Pipeline for microservice-based applications using Spring PetClinic. Jenkins Server on EC2 builds the pipelines.",
           url: "https://github.com/gulec2000/petclinic-microservices-project",
           img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_501.jpg",
+          video: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/videos/Project_501.mp4",
           tags: ["Jenkins", "Docker", "Kubernetes", "AWS"],
         },
         {
@@ -84,6 +85,7 @@ const translations = {
           desc: "Microservice web application with MySQL using Docker and Kubernetes with persistent volumes.",
           url: "https://github.com/gulec2000/203-Kubernetes-Microservice-Phonebook",
           img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_203.png",
+          video: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/videos/Project_203.mp4",
           tags: ["Kubernetes", "Docker", "Python", "MySQL"],
         },
         {
@@ -273,6 +275,7 @@ const translations = {
           desc: "Vollstandige CI/CD-Pipeline fur mikroservicebasierte Anwendungen mit Spring PetClinic. Jenkins-Server auf EC2.",
           url: "https://github.com/gulec2000/petclinic-microservices-project",
           img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_501.jpg",
+          video: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/videos/Project_501.mp4",
           tags: ["Jenkins", "Docker", "Kubernetes", "AWS"],
         },
         {
@@ -281,6 +284,7 @@ const translations = {
           desc: "Microservice-Webanwendung mit MySQL unter Verwendung von Docker und Kubernetes with Persistent Volumes.",
           url: "https://github.com/gulec2000/203-Kubernetes-Microservice-Phonebook",
           img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_203.png",
+          video: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/videos/Project_203.mp4",
           tags: ["Kubernetes", "Docker", "Python", "MySQL"],
         },
         {
