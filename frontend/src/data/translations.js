@@ -85,7 +85,7 @@ const translations = {
           desc: "Microservice web application with MySQL using Docker and Kubernetes with persistent volumes.",
           url: "https://github.com/gulec2000/203-Kubernetes-Microservice-Phonebook",
           img: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/Project_203.png",
-          video: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/videos/Project_203.mp4",
+          video: "https://raw.githubusercontent.com/gulec2000/serdar.github.io/feature/new-features/videos/Project_203.mp4",
           tags: ["Kubernetes", "Docker", "Python", "MySQL"],
         },
         {
