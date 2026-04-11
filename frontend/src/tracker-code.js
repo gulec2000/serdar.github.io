@@ -1,4 +1,4 @@
-export const TRACKER_CODE = (config: any) => `
+export const TRACKER_CODE = (config) => `
 <!-- Visitor Tracker Script -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
