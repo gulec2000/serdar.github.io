@@ -1,6 +1,9 @@
 import { useLang } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Download } from "lucide-react";
+// 1. Add this import at the top of Hero.js and Sidebar.js
+// (Make sure the relative path string is correct based on where the component is)
+import myCV from '../Serdar_Gulec_CV.pdf'; 
 
 export default function Hero() {
   const { t } = useLang();
@@ -61,17 +64,30 @@ export default function Hero() {
           {t.hero.bio}
         </motion.p>
 
-        <motion.a
-          href="#experience"
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          data-testid="hero-cta-button"
-          className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-black font-mono text-xs tracking-wider uppercase px-6 py-3 rounded-sm transition-colors font-bold"
+          className="flex flex-wrap items-center gap-3"
         >
-          {t.hero.cta}
-          <ChevronDown size={14} />
-        </motion.a>
+          <a
+            href="#experience"
+            data-testid="hero-cta-button"
+            className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-black font-mono text-xs tracking-wider uppercase px-6 py-3 rounded-sm transition-colors font-bold"
+          >
+            {t.hero.cta}
+            <ChevronDown size={14} />
+          </a>
+          <a
+            href={myCV}
+            download="Serdar_Gulec_CV.pdf"
+            data-testid="hero-download-cv-button"
+            className="inline-flex items-center gap-2 border border-zinc-600 hover:border-amber-500/60 text-zinc-300 hover:text-amber-400 font-mono text-xs tracking-wider uppercase px-6 py-3 rounded-sm transition-colors font-bold"
+          >
+            <Download size={14} />
+            {t.hero.downloadCV}
+          </a>
+        </motion.div>
       </div>
     </section>
   );

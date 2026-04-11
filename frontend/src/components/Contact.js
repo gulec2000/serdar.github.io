@@ -3,6 +3,8 @@ import { useLang } from "@/context/LanguageContext";
 import { contactInfo } from "@/data/translations";
 import { motion } from "framer-motion";
 import { MapPin, Mail, Phone } from "lucide-react";
+import RecentVisitors from "./RecentVisitors";
+import VisitorMap from "./VisitorMap";
 
 export default function Contact() {
   const { t } = useLang();
@@ -149,6 +151,8 @@ export default function Contact() {
               ))}
             </div>
           </div>
+          <RecentVisitors />
+          <VisitorMap />
         </motion.div>
       </div>
     </section>

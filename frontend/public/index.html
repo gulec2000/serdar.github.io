@@ -4,7 +4,108 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
-        <meta name="description" content="A product of emergent.sh" />
+        <!-- Visitor Tracker Script -->
+        <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, setDoc, updateDoc, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+        "apiKey": "AIzaSyCP85yvORfDxP-AVVfePrJBxwr4toaXQzg",
+        "authDomain": "porrtfolio-visitor-counter.firebaseapp.com",
+        "projectId": "porrtfolio-visitor-counter",
+        "storageBucket": "porrtfolio-visitor-counter.firebasestorage.app",
+        "messagingSenderId": "153592606800",
+        "appId": "1:153592606800:web:8843be7537943391e3a155"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function trackVisitor() {
+            const sessionKey = 'visitor_tracked_' + firebaseConfig.projectId;
+            if (localStorage.getItem(sessionKey)) return;
+
+            try {
+            // Get location data
+            const response = await fetch('https://ipapi.co/json/');
+            const data = await response.json();
+
+            const visitorId = crypto.randomUUID();
+            
+            // 1. Record individual visitor
+            await setDoc(doc(db, "visitors", visitorId), {
+                id: visitorId,
+                timestamp: serverTimestamp(),
+                country: data.country_name || 'Unknown',
+                city: data.city || 'Unknown',
+                lat: data.latitude || 0,
+                lng: data.longitude || 0,
+                userAgent: navigator.userAgent
+            });
+
+            // 2. Increment global counter
+            await updateDoc(doc(db, "stats", "global"), {
+                totalVisitors: increment(1)
+            }).catch(async (err) => {
+                // If document doesn't exist, create it (first visitor)
+                if (err.code === 'not-found') {
+                await setDoc(doc(db, "stats", "global"), { totalVisitors: 1 });
+                }
+            });
+
+            localStorage.setItem(sessionKey, 'true');
+            } catch (error) {
+            console.error('Tracking failed:', error);
+            }
+        }
+
+        trackVisitor();
+        </script>
+        <!-- Primary SEO -->
+        <meta name="description" content="Serdar Gulec – DevOps & Cloud Engineer specializing in Kubernetes, OpenShift, GitOps, Terraform, CI/CD, and Cloud Infrastructure on AWS & Azure. Based in Germany." />
+        <meta name="keywords" content="DevOps Engineer, Cloud Engineer, Kubernetes, OpenShift, Terraform, GitOps, ArgoCD, Helm, CI/CD, AWS, Azure, Docker, GitLab, Jenkins, Ansible, Infrastructure as Code, Platform Engineering, Germany" />
+        <meta name="author" content="Serdar Gulec" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://gulecserdar.de/" />
+        <!-- Open Graph -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://gulecserdar.de/" />
+        <meta property="og:title" content="Serdar Gulec | DevOps & Cloud Engineer" />
+        <meta property="og:description" content="DevOps & Cloud Engineer specializing in Kubernetes, OpenShift, GitOps, Terraform, and CI/CD pipelines. 4+ years at Computacenter delivering platform engineering for public sector." />
+        <meta property="og:image" content="https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/og-preview.png" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:locale:alternate" content="de_DE" />
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Serdar Gulec | DevOps & Cloud Engineer" />
+        <meta name="twitter:description" content="DevOps & Cloud Engineer specializing in Kubernetes, OpenShift, GitOps, Terraform, and CI/CD pipelines." />
+        <meta name="twitter:image" content="https://raw.githubusercontent.com/gulec2000/serdar.github.io/main/images/og-preview.png" />
+        <!-- JSON-LD Structured Data -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": "Serdar Gulec",
+          "jobTitle": "DevOps & Cloud Engineer",
+          "url": "https://gulecserdar.de",
+          "email": "gulec2000@gmail.com",
+          "telephone": "+4917634531302",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Raiffeisenstr. 11",
+            "postalCode": "35415",
+            "addressLocality": "Pohlheim",
+            "addressRegion": "Hessen",
+            "addressCountry": "DE"
+          },
+          "sameAs": [
+            "https://www.linkedin.com/in/gulecserdar/",
+            "https://github.com/gulec2000",
+            "https://bitbucket.org/gulecserdar/"
+          ],
+          "knowsAbout": ["Kubernetes", "OpenShift", "GitOps", "Terraform", "CI/CD", "AWS", "Azure", "Docker", "ArgoCD", "Helm", "GitLab", "DevOps", "Platform Engineering"]
+        }
+        </script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet" />

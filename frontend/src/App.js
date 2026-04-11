@@ -1,11 +1,12 @@
 import "@/App.css";
-import { LanguageProvider } from "@/context/LanguageContext";
-import Sidebar from "@/components/Sidebar";
-import Hero from "@/components/Hero";
-import Experience from "@/components/Experience";
-import Projects from "@/components/Projects";
-import Skills from "@/components/Skills";
-import Contact from "@/components/Contact";
+import { LanguageProvider } from "./context/LanguageContext";
+import Sidebar from "./components/Sidebar";
+import Hero from "./components/Hero";
+import Experience from "./components/Experience";
+import Projects from "./components/Projects";
+import SkillsBento from "./components/SkillsBento";
+import Blog from "./components/Blog";
+import Contact from "./components/Contact";
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
           <Hero />
           <Experience />
           <Projects />
-          <Skills />
+          <SkillsBento />
+          <Blog />
           <Contact />
           <footer className="border-t border-zinc-800 py-8 px-6 md:px-12">
             <p className="font-mono text-xs text-zinc-600 text-center">
